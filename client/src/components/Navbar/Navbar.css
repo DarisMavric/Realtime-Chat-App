@@ -5,9 +5,11 @@
     padding: 10px;
 }
 
-.navbar .logo img{
-    width: 200px;
-    height: 75px;
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #D8C4B6;
 }
 
 .navbar .links {
@@ -23,8 +25,8 @@
 .navbar .links ul li {
     display: flex;
     border-radius: 10px;
-    color: #213555;
-    font-size: 25px;
+    color: #D8C4B6;
+    font-size: 20px;
     gap: 5px;
     font-weight: bold;
     align-items: center;
