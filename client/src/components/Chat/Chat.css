@@ -1,0 +1,107 @@
+.chat {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    height: 100%;
+}
+
+.chat .chat-title {
+    display: flex;
+    gap: 5px;
+    margin: 15px;
+}
+
+.chat-title .contact-image img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.chat-title .contact-name {
+    display: block;
+    align-content: center;
+    color: #D8C4B6;
+    cursor: pointer;
+}
+
+.chat .chat-messages {
+    display: block;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.chat .chat-messages .sender {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    float: right;
+    width: 100%;
+    gap: 5px;
+}
+
+.chat .chat-messages .sender .sender-image img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.chat .chat-messages .sender .sender-message{
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    max-width: 350px;
+    word-wrap: break-word;
+    color: white;
+    background-color: black;
+}
+
+.chat .chat-messages .reciever {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    float: left;
+    gap: 5px;
+}
+
+.chat .chat-messages .reciever .reciever-image img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.chat .chat-messages .reciever .reciever-message{
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    max-width: 350px;
+    word-wrap: break-word;
+    color: white;
+    background-color: black;
+}
+
+.chat .send-message {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center; /* Center the input within the div */
+    justify-content: flex-start;
+    margin: 15px;
+    gap: 20px;
+}
+
+.chat .send-message input::placeholder {
+    color: white;
+}
+
+.chat .send-message input {
+    width: 80%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid black;
+    font-size: 15px;
+    color: white;
+    padding: 10px;
+}
