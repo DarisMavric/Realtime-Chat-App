@@ -30,8 +30,13 @@
 .contacts .contact {
     display: flex;
     gap: 5px;
-    margin: 15px;
+    padding: 15px;
 }
+
+.contacts .contact:hover {
+    background-color: #3E5879;
+}
+
 
 .contact-image img{
     width: 60px;

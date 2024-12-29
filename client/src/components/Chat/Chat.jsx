@@ -4,7 +4,7 @@ import { FaFileImage } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import "./Chat.css"
 
-const Chat = () => {
+const Chat = (id) => {
   return (
     <div className="chat">
         <div className="chat-title">
