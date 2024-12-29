@@ -27,58 +27,70 @@
 .chat .chat-messages {
     display: block;
     flex-grow: 1;
-    overflow-y: auto;
 }
 
 .chat .chat-messages .sender {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    float: right;
-    width: 100%;
     gap: 5px;
+    margin: 10px;
+}
+
+.chat .chat-messages .sender .sender-image {
+    height: 50px;
+    width: 50px;
 }
 
 .chat .chat-messages .sender .sender-image img{
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
 .chat .chat-messages .sender .sender-message{
-    padding: 10px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    max-width: 350px;
-    word-wrap: break-word;
-    color: white;
-    background-color: black;
+    padding: 10px;                            /* Adds padding inside the div */
+    border-top-left-radius: 20px;             /* Rounded top-left corner */
+    border-top-right-radius: 20px;            /* Rounded top-right corner */
+    border-bottom-left-radius: 20px;         /* Rounded bottom-left corner */
+    max-width: 50%;                              /* Makes the div take up full width of the parent container */                         /* Sets the max-width of the div */                             /* Ensures the div adjusts its height based on content */
+    word-wrap: break-word;                    /* Ensures long words break and wrap to the next line */
+    word-break: break-word;                   /* Ensures the text breaks when necessary */
+    white-space: normal;                      /* Makes sure text wraps at word boundaries */
+    color: white;                             /* Sets the text color to white */
+    background-color: black;                 /* Sets the background color to black */  
 }
 
 .chat .chat-messages .reciever {
+    margin: 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-end;
-    float: left;
     gap: 5px;
 }
 
-.chat .chat-messages .reciever .reciever-image img{
+.chat .chat-messages .reciever .reciever-image {
     width: 50px;
     height: 50px;
+}
+
+.chat .chat-messages .reciever .reciever-image img{
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
 }
 
 .chat .chat-messages .reciever .reciever-message{
-    padding: 10px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    max-width: 350px;
-    word-wrap: break-word;
-    color: white;
-    background-color: black;
+    padding: 10px;                            /* Adds padding inside the div */
+    border-top-left-radius: 20px;             /* Rounded top-left corner */
+    border-top-right-radius: 20px;            /* Rounded top-right corner */
+    border-bottom-right-radius: 20px;         /* Rounded bottom-left corner */
+    max-width: 50%;                              /* Makes the div take up full width of the parent container */                         /* Sets the max-width of the div */                             /* Ensures the div adjusts its height based on content */
+    word-wrap: break-word;                    /* Ensures long words break and wrap to the next line */
+    word-break: break-word;                   /* Ensures the text breaks when necessary */
+    white-space: normal;                      /* Makes sure text wraps at word boundaries */
+    color: white;                             /* Sets the text color to white */
+    background-color: black; 
 }
 
 .chat .send-message {
@@ -86,9 +98,8 @@
     width: 100%;
     display: flex;
     align-items: center; /* Center the input within the div */
-    justify-content: flex-start;
-    margin: 15px;
-    gap: 20px;
+    justify-content: space-around;
+    margin: 10px;
 }
 
 .chat .send-message input::placeholder {

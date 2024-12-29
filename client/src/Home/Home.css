@@ -6,7 +6,7 @@
 }
 
 .chat-and-contacts {
-    width: 70%;
+    width: 90%;
     height: 800px;
     background-color: #213555;
     border-radius: 15px;
@@ -30,7 +30,7 @@
 .contacts .contact {
     display: flex;
     gap: 5px;
-    padding: 15px;
+    padding: 5px;
 }
 
 .contacts .contact:hover {

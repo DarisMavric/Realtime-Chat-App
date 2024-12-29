@@ -33,6 +33,7 @@ const Chat = (id) => {
                     <p>asdasdasdasdasdddddddddddddddddddddddddd</p>
                 </div>
             </div>
+            
         </div>
         <div className="send-message">
             <input type="text" placeholder='Type a message...'/>
