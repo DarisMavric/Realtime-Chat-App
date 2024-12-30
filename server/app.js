@@ -2,7 +2,8 @@ import express from "express";
 import connectDB from "./db.js";
 import cors from "cors"
 import cookieParser from "cookie-parser"
-import userRoutes from "./user.js"
+import userRoutes from "./userRoutes.js"
+import messageRoutes from "./messageRoutes.js"
 
 connectDB();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 
 
 app.use('/api/user/',userRoutes)
+app.use('/api/message/',messageRoutes)
 
 
 

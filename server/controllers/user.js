@@ -7,6 +7,10 @@ export const getUser = async(req,res) => {
 
 }
 
+export const editUser = async(req,res) => {
+
+}
+
 export const signIn = async(req,res) => {
     const {email,password} = req.body;
     if(!email || !password) {
