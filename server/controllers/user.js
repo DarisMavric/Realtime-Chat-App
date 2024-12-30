@@ -1,6 +1,8 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import multer from "multer";
+import { upload } from "../app.js";
 
 
 export const getUser = async(req,res) => {
@@ -14,15 +16,24 @@ export const getUser = async(req,res) => {
 }
 
 export const editUser = async(req,res) => {
-    const {image,id} = req.body;
-    const user = await User.findByIdAndUpdate(id,{
-        image: image
-    })
-    if(user){
-        res.status(200).json("Profile Updated");
-    } else {
-        res.status(400).json("Error");
-    }
+    upload.single('file')(req, res, async(err) => {
+        const {id} = req.body;
+        const file = req.file;
+        if(file){
+            const user = await User.findByIdAndUpdate(
+                id, 
+                { image: file.filename}, 
+                { new: true } // This ensures the updated user is returned
+            );
+            if(user){
+                res.status(200).json("Profile Updated");
+            } else {
+                res.status(400).json("Error");
+            }
+        } else {
+            res.status(400).json("No changes provided");
+        }
+    });
 }
 
 export const signOut = async(req,res) => {
@@ -48,7 +59,7 @@ export const signIn = async(req,res) => {
                 last_name: user.lname,
                 email: user.email
             }
-            const token = jwt.sign({ id: user._id }, "secretkey");
+            const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
             res.cookie("accessToken", token);
             res.status(200).json(data);
             
@@ -85,7 +96,7 @@ export const signUp = async(req,res) => {
             fullName: user.fullName,
             email: user.email
         }
-        const token = jwt.sign({ id: user._id }, "secretkey");
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
         res.cookie("accessToken", token);
         res.status(200).json(data);
     } else {
