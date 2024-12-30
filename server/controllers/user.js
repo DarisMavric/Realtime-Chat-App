@@ -4,11 +4,30 @@ import jwt from "jsonwebtoken";
 
 
 export const getUser = async(req,res) => {
-
+    const {id} = req.body;
+    const user = await User.findById(id);
+    if(user){
+        res.status(200).json(user);
+    } else {
+        res.status(400).json('User does not exist!');
+    }
 }
 
 export const editUser = async(req,res) => {
+    const {image,id} = req.body;
+    const user = await User.findByIdAndUpdate(id,{
+        image: image
+    })
+    if(user){
+        res.status(200).json("Profile Updated");
+    } else {
+        res.status(400).json("Error");
+    }
+}
 
+export const signOut = async(req,res) => {
+    res.clearCookie('accessToken');
+    return res.status(200).json("Cookies deleted");
 }
 
 export const signIn = async(req,res) => {
