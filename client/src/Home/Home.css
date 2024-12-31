@@ -1,3 +1,8 @@
+.home {
+    display: flex;
+}
+
+
 .chatter {
     display: flex;
     justify-content: center;
