@@ -7,6 +7,16 @@ import { MdAddAPhoto } from "react-icons/md";
 import "./Profile.css";
 
 const Profile = () => {
+
+  const fileInputRef = React.useRef(null);
+
+  const handleClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); // Trigger the file input click
+    }
+  };
+
+
   return (
     <div className="profile-page">
       <Navbar />
@@ -20,8 +30,9 @@ const Profile = () => {
             <div className="change-image">
               <div className="image">
                 <img src={icon} alt="" style={{ width: 150, height: 150 }} />
-                <div className="change">
-                  <MdAddAPhoto className="button-change" />
+                <div className="change" onClick={handleClick}>
+                  <MdAddAPhoto className="button-change"/>
+                  <input type="file" style={{display: "none"}} ref={fileInputRef}/>
                 </div>
               </div>
             </div>

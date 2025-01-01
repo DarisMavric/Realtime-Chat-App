@@ -11,7 +11,6 @@ const Contacts = () => {
   return (
     <div className="contacts">
       <div className="all-contacts">
-        <FaUserFriends style={{ width: 35, height: 35 }} />
         <h1>Contacts</h1>
       </div>
       <hr />
@@ -21,7 +20,7 @@ const Contacts = () => {
         </div>
         <div className="contact-name">
           <h2>Daris Mavric</h2>
-          <p>Online</p>
+          <p>Hey there</p>
         </div>
       </div>
       <div className="contact">
@@ -30,7 +29,7 @@ const Contacts = () => {
         </div>
         <div className="contact-name">
           <h2>Daris Mavric</h2>
-          <p>Online</p>
+          <p>You: ok</p>
         </div>
       </div>
     </div>

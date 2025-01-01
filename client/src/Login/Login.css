@@ -1,17 +1,16 @@
 .login-page {
     display: flex;
-    flex-direction: column;    /* Optional: ensures the Navbar is placed at the top */
-    justify-content: center;   /* Centers login-section vertically */
-    align-items: center;       /* Centers login-section horizontally */
-    height: 100vh;             /* Full viewport height */
+    height: 100vh;
+    width: 100%;           /* Full viewport height */
 }
 
 .login-section {
     width: 100%;
-    height: 100%;   
+    height: 100%;  
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #213555;
 }
 
 .login-form {

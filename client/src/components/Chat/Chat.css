@@ -1,6 +1,6 @@
 .chat {
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column; /* Arrange children vertically */
     height: 100%;
 }

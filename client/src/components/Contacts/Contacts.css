@@ -14,13 +14,14 @@
 
 .contacts .contact {
     display: flex;
+    margin: 10px;
     gap: 5px;
-    padding: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #D8C4B6;
 }
 
-.contacts .contact:hover {
-    background-color: #3E5879;
-}
+
 
 
 .contact-image img{
@@ -32,6 +33,6 @@
 .contact-name {
     display: block;
     align-content: center;
-    color: #D8C4B6;
+    color: #213555;;
     cursor: pointer;
 }
