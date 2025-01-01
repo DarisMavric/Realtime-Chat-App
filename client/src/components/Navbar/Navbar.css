@@ -34,6 +34,12 @@
     font-size: 40px;
     padding: 10px;
     border-radius: 10px;
-    background-color: #213555;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.active {
+    background-color: #213555; /* Change to the color you prefer */
+  }
+
 
