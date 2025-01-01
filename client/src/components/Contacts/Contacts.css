@@ -1,0 +1,37 @@
+.contacts {
+    width: 30%;
+    display: block;
+    padding: 10px;
+}
+
+.all-contacts {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+    color: #D8C4B6;
+}
+
+.contacts .contact {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+}
+
+.contacts .contact:hover {
+    background-color: #3E5879;
+}
+
+
+.contact-image img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.contact-name {
+    display: block;
+    align-content: center;
+    color: #D8C4B6;
+    cursor: pointer;
+}

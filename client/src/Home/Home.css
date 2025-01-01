@@ -1,59 +1,21 @@
 .home {
     display: flex;
+    height: 100vh;
+    width: 100%;
 }
 
 
 .chatter {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
+  flex-grow: 1; /* This makes it take the remaining space */
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .chat-and-contacts {
-    width: 90%;
-    height: 800px;
+    flex-grow: 1;
     background-color: #213555;
-    border-radius: 15px;
     display: flex;
-}
-
-.contacts {
-    width: 30%;
-    display: block;
-    padding: 10px;
-}
-
-.all-contacts {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 10px;
-    color: #D8C4B6;
-}
-
-.contacts .contact {
-    display: flex;
-    gap: 5px;
-    padding: 5px;
-}
-
-.contacts .contact:hover {
-    background-color: #3E5879;
-}
-
-
-.contact-image img{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-
-.contact-name {
-    display: block;
-    align-content: center;
-    color: #D8C4B6;
-    cursor: pointer;
 }
 
 .welcome {
