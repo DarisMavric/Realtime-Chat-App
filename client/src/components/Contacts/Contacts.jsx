@@ -4,7 +4,7 @@ import { FaUserFriends } from "react-icons/fa";
 import { IoChatbox } from "react-icons/io5";
 import "./Contacts.css"
 
-const Contacts = () => {
+const Contacts = ({setChatID}) => {
     const clickedContact = () => {
         console.log('Contact Clicked');
     }
@@ -12,9 +12,9 @@ const Contacts = () => {
     <div className="contacts">
       <div className="all-contacts">
         <h1>Contacts</h1>
+        <hr />
       </div>
-      <hr />
-      <div className="contact" onClick={() => clickedContact()}>
+      <div className="contact" onClick={() => setChatID(1)}>
         <div className="contact-image">
           <img src={icon} alt="" />
         </div>
@@ -23,7 +23,7 @@ const Contacts = () => {
           <p>Hey there</p>
         </div>
       </div>
-      <div className="contact">
+      <div className="contact" onClick={() => setChatID(2)}>
         <div className="contact-image">
           <img src={icon} alt="" />
         </div>

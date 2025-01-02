@@ -7,13 +7,10 @@ import { FaSnapchat } from "react-icons/fa6";
 import { BsChatRightDots } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({setActivePage}) => {
-  const [activeIndex, setActiveIndex] = useState(null); // Track the active item index
+const Navbar = () => {
+  const navigate = useNavigate();
 
-  const handleClick = (index) => {
-    setActiveIndex(index); // Set the active item index on click
-  };
-
+  console.log(window.location.href);
   return (
     <div className="navbar">
       <div className="logo-and-links">
@@ -23,20 +20,8 @@ const Navbar = ({setActivePage}) => {
         <div className="links">
           <ul>
             <li
-              onClick={() => {setActivePage('home'); setActiveIndex(0);}}
-              className={activeIndex === 0 ? "active" : ""}
-            >
-              <FaUserFriends />
-            </li>
-            <li
-              onClick={() => {setActivePage('profile'); setActiveIndex(1)}}
-              className={activeIndex === 1 ? "active" : ""}
-            >
-              <CgProfile />
-            </li>
-            <li
-              onClick={() => handleClick(3)}
-              className={activeIndex === 3 ? "active" : ""}
+              onClick={() => navigate('/')}
+              className={window.location.pathname === "/" ? "active" : ""}
             >
               <BsChatRightDots />
             </li>
@@ -49,7 +34,10 @@ const Navbar = ({setActivePage}) => {
             <li>
               <RiLogoutBoxFill />
             </li>
-            <li>
+            <li
+              onClick={() => navigate('/profile')}
+              className={window.location.pathname === "/profile" ? "active" : ""}
+            >
               <CgProfile />
             </li>
           </ul>

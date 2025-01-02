@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <div className="login-page">
-      <Navbar />
       <div className="login-section">
         <div className="login-form">
           <div className="login-form-header">

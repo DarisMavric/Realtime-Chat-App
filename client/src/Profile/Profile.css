@@ -1,6 +1,14 @@
-.profile-section {      display: flex;
-    background-color: #213555;
+.profile-page {
+    display: flex;
+    height: 100vh;
+    width: 100%; 
+}
+
+.profile-section {
     flex-grow: 1;
+    height: 100%;  
+    display: flex;
+    background-color: #213555;
 }
 
 .profile-form {
@@ -8,14 +16,18 @@
     display: flex;
     flex-direction: column;
     background-color: #213555;
-    justify-content: space-around;
+    justify-content: space-between;
     color: #D8C4B6;
-    padding: 20px;
+    padding: 10px;
     border-right: 1px solid white;
 }
 
 .profile-form-title {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+    color: #D8C4B6;
 }
 
 .profile-form-header {
@@ -55,6 +67,7 @@
 }
 
 .profile-form-body {
+    padding: 10px;
     display: flex;
     flex-direction: column;
     width: 100%;
