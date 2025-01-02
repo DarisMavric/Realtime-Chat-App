@@ -5,6 +5,7 @@ import { IoPerson } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { MdAddAPhoto } from "react-icons/md";
 import "./Profile.css";
+import Welcome from "../components/Welcome/Welcome";
 
 const Profile = () => {
 
@@ -24,7 +25,6 @@ const Profile = () => {
         <div className="profile-form">
           <div className="profile-form-title">
             <h1>Profile</h1>
-            <p>Your profile information</p>
           </div>
           <div className="profile-form-header">
             <div className="change-image">
@@ -65,6 +65,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
+        <Welcome />
       </div>
     </div>
   );

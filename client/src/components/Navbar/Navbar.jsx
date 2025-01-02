@@ -34,12 +34,6 @@ const Navbar = () => {
               <CgProfile />
             </li>
             <li
-              onClick={() => handleClick(2)}
-              className={activeIndex === 2 ? "active" : ""}
-            >
-              <RiLogoutBoxFill />
-            </li>
-            <li
               onClick={() => handleClick(3)}
               className={activeIndex === 3 ? "active" : ""}
             >
@@ -52,7 +46,7 @@ const Navbar = () => {
         <div className="links">
           <ul>
             <li>
-              <FaUserFriends />
+              <RiLogoutBoxFill />
             </li>
             <li>
               <CgProfile />
