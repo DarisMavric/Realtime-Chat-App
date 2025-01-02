@@ -5,8 +5,9 @@ import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { FaSnapchat } from "react-icons/fa6";
 import { BsChatRightDots } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({setActivePage}) => {
   const [activeIndex, setActiveIndex] = useState(null); // Track the active item index
 
   const handleClick = (index) => {
@@ -22,13 +23,13 @@ const Navbar = () => {
         <div className="links">
           <ul>
             <li
-              onClick={() => handleClick(0)}
+              onClick={() => {setActivePage('home'); setActiveIndex(0);}}
               className={activeIndex === 0 ? "active" : ""}
             >
               <FaUserFriends />
             </li>
             <li
-              onClick={() => handleClick(1)}
+              onClick={() => {setActivePage('profile'); setActiveIndex(1)}}
               className={activeIndex === 1 ? "active" : ""}
             >
               <CgProfile />

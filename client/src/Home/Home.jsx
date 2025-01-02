@@ -8,8 +8,6 @@ import Welcome from "../components/Welcome/Welcome";
 const Home = () => {
 
   return (
-    <div className="home">
-      <Navbar />
       <div className="chatter">
         <div className="chat-and-contacts">
           <Contacts/>
@@ -17,7 +15,6 @@ const Home = () => {
           <Chat/>
         </div>
       </div>
-    </div>
   );
 };
 

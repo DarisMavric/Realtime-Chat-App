@@ -5,18 +5,18 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import Profile from './Profile/Profile';
+import { useState } from 'react';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
+  const [activePage, setActivePage] = useState('home');
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/signup' element={<Register/>}/>
-          <Route path='/profile' element={<Profile/>}/>
-        </Routes>
-      </BrowserRouter>
+      <Navbar setActivePage={setActivePage}/>
+      <div className='content'>
+        {activePage === 'home' && <Home/>}
+        {activePage === 'profile' && <Profile/>}
+      </div>
     </div>
   );
 }
