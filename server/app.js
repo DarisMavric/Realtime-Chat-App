@@ -27,8 +27,6 @@ export const upload = multer({ storage: storage });
 
 
 app.use(cookieParser());
-
-
 app.use(express.json());
 
 
