@@ -5,13 +5,23 @@ import multer from "multer";
 import { upload } from "../app.js";
 
 
-export const getUser = async(req,res) => {
+export const getUsers = async(req,res) => {
     const {id} = req.body;
-    const user = await User.findById(id);
-    if(user){
-        res.status(200).json(user);
+    if(id){
+        console.log(id);
+        const user = await User.findById(id);
+        if(user){
+            res.status(200).json(user);
+        } else {
+            res.status(400).json('User does not exist!');
+        }
     } else {
-        res.status(400).json('User does not exist!');
+        const users = await User.find();
+        if(users){
+            res.status(200).json(users);
+        } else {
+            res.status(400).json("No users");
+        }
     }
 }
 
@@ -55,8 +65,8 @@ export const signIn = async(req,res) => {
         if(checkPassword) {
 
             const data = {
-                first_name: user.fname,
-                last_name: user.lname,
+                fullName: user.fullName,
+                id: user._id,
                 email: user.email
             }
             const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
