@@ -7,16 +7,16 @@ import Welcome from "../components/Welcome/Welcome";
 
 const Home = () => {
 
-  const [chatID,setChatID] = useState(null);
+  const [chat,setChat] = useState(null);
 
   return (
     <div className="home">
       <Navbar />
       <div className="chatter">
         <div className="chat-and-contacts">
-          <Contacts setChatID={setChatID}/>
+          <Contacts setChat={setChat}/>
           {
-            chatID ? <Chat chatID={chatID}/> : <Welcome />
+            chat ? <Chat contact={chat}/> : <Welcome />
           }
         </div>
       </div>

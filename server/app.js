@@ -5,10 +5,9 @@ import cookieParser from "cookie-parser"
 import userRoutes from "./userRoutes.js"
 import messageRoutes from "./messageRoutes.js"
 import multer from "multer";
+import {app,server} from "./socket/socket.js"
 
 connectDB();
-
-const app = express();
 
 app.use(cors({
     origin: 'http://localhost:3000',
@@ -29,14 +28,13 @@ export const upload = multer({ storage: storage });
 app.use(cookieParser());
 app.use(express.json());
 
-
-
-
 app.use('/api/user/',userRoutes)
 app.use('/api/message/',messageRoutes)
 
 
 
-app.listen(process.env.PORT,() => {
+
+
+server.listen(process.env.PORT,() => {
     console.log("Started!");
 })

@@ -54,7 +54,6 @@ export const editUser = async(req,res) => {
                 { new: true } // This ensures the updated user is returned
             );
             if(user){
-                console.log(user);
                 res.status(200).json("Profile Updated");
             } else {
                 res.status(400).json("Error");

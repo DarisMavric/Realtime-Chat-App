@@ -45,7 +45,7 @@ export const getMessages = async(req,res) => {
             if(findChat){
                 return res.status(200).json(findChat);
             } else {
-                return res.status(400).json("Error");
+                return res.status(200).json("no messages")
             }
         }
     } catch (err) {

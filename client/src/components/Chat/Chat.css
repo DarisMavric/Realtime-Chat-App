@@ -58,8 +58,8 @@
     word-wrap: break-word;                    /* Ensures long words break and wrap to the next line */
     word-break: break-word;                   /* Ensures the text breaks when necessary */
     white-space: normal;                      /* Makes sure text wraps at word boundaries */
-    color: white;                             /* Sets the text color to white */
-    background-color: black;                 /* Sets the background color to black */  
+    color: #213555;                             /* Sets the text color to white */
+    background-color: #D8C4B6;                 /* Sets the background color to black */  
 }
 
 .chat .chat-messages .reciever {
@@ -91,7 +91,7 @@
     word-break: break-word;                   /* Ensures the text breaks when necessary */
     white-space: normal;                      /* Makes sure text wraps at word boundaries */
     color: white;                             /* Sets the text color to white */
-    background-color: black; 
+    background-color: #3E5879; 
 }
 
 .chat .send-message {
@@ -112,8 +112,12 @@
     height: 50px;
     border-radius: 10px;
     background-color: transparent;
-    border: 1px solid black;
-    font-size: 15px;
+    border: 1px solid #D8C4B6;
+    font-size: 20px;
     color: white;
     padding: 10px;
+}
+
+.chat .send-message {
+    color: #D8C4B6;
 }

@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 
-const Contacts = ({ setChatID }) => {
+const Contacts = ({ setChat }) => {
   const { currentUser } = useContext(AuthContext);
 
   const { data, isLoading } = useQuery({
@@ -18,25 +18,29 @@ const Contacts = ({ setChatID }) => {
     queryKey: ["users"],
   });
 
-  console.log(data);
-
   return (
     <div className="contacts">
       <div className="all-contacts">
         <h1>Contacts</h1>
         <hr />
       </div>
-      {data?.map((user) => (
-        <div className="contact" onClick={() => setChatID(user._id)}>
-          <div className="contact-image">
-            <img src={`/images/${user?.image}`} alt="" />
-          </div>
-          <div className="contact-name">
-            <h2>{user?.fullName}</h2>
-            <p>{user?.about ? user.about : "Hey there"}</p>
-          </div>
-        </div>
-      ))}
+      {data?.map(
+        (user) =>
+          user._id !== currentUser?.id && (
+            <div
+              className="contact"
+              onClick={() => setChat(user)}
+            >
+              <div className="contact-image">
+                <img src={`/images/${user?.image}`} alt="" />
+              </div>
+              <div className="contact-name">
+                <h2>{user?.fullName}</h2>
+                <p>{user?.about ? user.about : "Hey there"}</p>
+              </div>
+            </div>
+          )
+      )}
     </div>
   );
 };
