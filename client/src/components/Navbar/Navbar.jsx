@@ -8,9 +8,9 @@ import { BsChatRightDots } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  
   const navigate = useNavigate();
 
-  console.log(window.location.href);
   return (
     <div className="navbar">
       <div className="logo-and-links">

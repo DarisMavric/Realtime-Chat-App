@@ -6,9 +6,8 @@ import { upload } from "../app.js";
 
 
 export const getUsers = async(req,res) => {
-    const {id} = req.body;
+    const {id} = req.query;
     if(id){
-        console.log(id);
         const user = await User.findById(id);
         if(user){
             res.status(200).json(user);
@@ -26,13 +25,17 @@ export const getUsers = async(req,res) => {
 }
 
 export const editUser = async(req,res) => {
-    upload.single('file')(req, res, async(err) => {
-        const {id} = req.body;
+    upload.single('image')(req, res, async(err) => {
+        const id = req.body.id;
         const file = req.file;
         if(file){
             const user = await User.findByIdAndUpdate(
                 id, 
-                { image: file.filename}, 
+                { 
+                    image: file.filename,
+                    fullName: req.body.fullName,  // Update fullName
+                    about: req.body.about          // Update about field
+                },
                 { new: true } // This ensures the updated user is returned
             );
             if(user){
@@ -41,8 +44,22 @@ export const editUser = async(req,res) => {
                 res.status(400).json("Error");
             }
         } else {
-            res.status(400).json("No changes provided");
-        }
+            console.log(req.body.about)
+            const user = await User.findByIdAndUpdate(
+                id, 
+                { 
+                    fullName: req.body.fullName,  // Update fullName
+                    about: req.body.about          // Update about field
+                },
+                { new: true } // This ensures the updated user is returned
+            );
+            if(user){
+                console.log(user);
+                res.status(200).json("Profile Updated");
+            } else {
+                res.status(400).json("Error");
+            }
+        } 
     });
 }
 
@@ -95,6 +112,7 @@ export const signUp = async(req,res) => {
 
     const hashedPassword = await bcrypt.hash(password,10);
     const user = await User.create({
+        image: "user-avatar-male-5.png",
         fullName,
         email,
         password: hashedPassword

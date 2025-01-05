@@ -6,7 +6,6 @@ import "./Chat.css"
 
 const Chat = (id) => {
 
-    console.log(id);
   return (
     <div className="chat">
         <div className="chat-title">

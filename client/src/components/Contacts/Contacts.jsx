@@ -29,7 +29,7 @@ const Contacts = ({ setChatID }) => {
       {data?.map((user) => (
         <div className="contact" onClick={() => setChatID(user._id)}>
           <div className="contact-image">
-            <img src={user?.image ? user.image : icon} alt="" />
+            <img src={`/images/${user?.image}`} alt="" />
           </div>
           <div className="contact-name">
             <h2>{user?.fullName}</h2>

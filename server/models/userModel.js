@@ -18,8 +18,9 @@ const userSchema = mongoose.Schema({
     image: {
         type:String,
     },
-    online: {
-        type:Boolean,
+    about: {
+        type:String,
+        default: 'Hey there'
     }
 },
     {
