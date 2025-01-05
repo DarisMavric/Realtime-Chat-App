@@ -37,7 +37,6 @@ io.on("connection", (socket) => {
 
 
   socket.on('sendMessage', (data) => {
-    console.log(`Message recieved: ${data.message} For ${data.contactId}`);
     socketUserMap.map((user) => {
         if(user.userId === data.contactId){
             const message = {
@@ -45,15 +44,13 @@ io.on("connection", (socket) => {
                 text: data.message
             }
             io.to(user.socket).emit('recieveMessage', message)
-            console.log(message);
         }
     })
 
 });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
-    console.log(socketUserMap);
+    
   });
 });
 

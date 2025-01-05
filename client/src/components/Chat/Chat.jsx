@@ -7,11 +7,15 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { io } from "socket.io-client";
+import test from "./test.jpg"
 
 const Chat = ({ contact }) => {
 
     const [message,newMessage] = useState('');
-    const [messages,setMessages] = useState([])
+    const [messages,setMessages] = useState([]);
+    const [file,setFile] = useState(null);
+
+    const fileInputRef = React.useRef(null);
 
    const socket = io("localhost:8080");
 
@@ -64,6 +68,16 @@ const Chat = ({ contact }) => {
     }
   }
 
+  const handleChange = (e) => {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const handleClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); // Trigger the file input click
+    }
+  };
+
   return (
     <div className="chat">
       <div className="chat-title">
@@ -80,6 +94,7 @@ const Chat = ({ contact }) => {
           message?.userId == currentUser?.id ? (
             <div className="sender">
               <div className="sender-message">
+                <img src={test} alt="" />
                 <p>{message?.text}</p>
               </div>
               <div className="sender-image">
@@ -100,8 +115,9 @@ const Chat = ({ contact }) => {
       </div>
       <div className="send-message">
         <input type="text" placeholder="Type a message..."  value={message} onChange={(e) => newMessage(e.target.value)}/>
-        <FaFileImage style={{ width: 40, height: 40 }} />
+        <FaFileImage style={{ width: 40, height: 40, cursor: "pointer" }} onClick={handleClick}/>
         <IoIosSend style={{ width: 40, height: 40 }}  onClick={sendMessage}/>
+        <input type="file" style={{display: "none"}} ref={fileInputRef} onChange={handleChange}/>
       </div>
     </div>
   );
