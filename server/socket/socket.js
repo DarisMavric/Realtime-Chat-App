@@ -41,7 +41,8 @@ io.on("connection", (socket) => {
         if(user.userId === data.contactId){
             const message = {
                 userId: data.userId,
-                text: data.message
+                text: data.message,
+                file: data?.file || null
             }
             io.to(user.socket).emit('recieveMessage', message)
         }

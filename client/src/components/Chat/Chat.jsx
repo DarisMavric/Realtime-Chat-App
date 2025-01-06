@@ -37,6 +37,7 @@ const Chat = ({ contact }) => {
         try {
           socketRef.current.emit('clientData', connectionData);
           socketRef.current.on('recieveMessage', (message) => {
+            console.log(message);
             setMessages((prevMessages) => [...prevMessages, message]);
           });
         } catch (error) {
@@ -55,31 +56,40 @@ const Chat = ({ contact }) => {
   }, [currentUser,]); // Add currentUser as a dependency
 
   const sendMessage = () => {
-    if (message.trim()) {
+    if (message.trim() || file) {
       const senderMessage = {
         userId: currentUser?.id,
-        text: message
+        text: message,
+        file
       };
+
+      console.log(senderMessage);
 
       // Use socketRef to emit the message
       socketRef.current.emit('sendMessage', {
         message,
+        file,
         contactId: contact._id,
         userId: currentUser?.id
       });
 
       setMessages((prevMessages) => [...prevMessages, senderMessage]);
       newMessage('');  // Clear the input field after sending the message
+      setFile(null);
     }
   };
 
   const handleChange = (e) => {
-    setFile(URL.createObjectURL(e.target.files[0]));
-  };
-
-  const handleClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click(); // Trigger the file input click
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      
+      reader.onloadend = () => {
+        const base64File = reader.result;
+        setFile(base64File);  // Set the base64 file to state
+      };
+  
+      reader.readAsDataURL(selectedFile); // Convert the file to base64 string
     }
   };
 
@@ -99,7 +109,7 @@ const Chat = ({ contact }) => {
           message?.userId == currentUser?.id ? (
             <div className="sender">
               <div className="sender-message">
-                <img src={test} alt="" />
+                {message?.file && <img src={message?.file} alt="" />}
                 <p>{message?.text}</p>
               </div>
               <div className="sender-image">
@@ -112,6 +122,7 @@ const Chat = ({ contact }) => {
                 <img src={icon} alt="" />
               </div>
               <div className="reciever-message">
+                {message?.file && <img src={message?.file} alt="" />}
                 <p>{message?.text}</p>
               </div>
             </div>
@@ -120,7 +131,7 @@ const Chat = ({ contact }) => {
       </div>
       <div className="send-message">
         <input type="text" placeholder="Type a message..."  value={message} onChange={(e) => newMessage(e.target.value)}/>
-        <FaFileImage style={{ width: 40, height: 40, cursor: "pointer" }} onClick={handleClick}/>
+        <FaFileImage style={{ width: 40, height: 40, cursor: "pointer" }} onClick={() => fileInputRef.current.click()}/>
         <IoIosSend style={{ width: 40, height: 40 }}  onClick={sendMessage}/>
         <input type="file" style={{display: "none"}} ref={fileInputRef} onChange={handleChange}/>
       </div>
