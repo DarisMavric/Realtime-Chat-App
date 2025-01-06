@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import icon from "../../Home/user-avatar-male-5.png";
 import { FaFileImage } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
@@ -6,7 +6,7 @@ import "./Chat.css";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import test from "./test.jpg"
 
 const Chat = ({ contact }) => {
@@ -15,58 +15,63 @@ const Chat = ({ contact }) => {
     const [messages,setMessages] = useState([]);
     const [file,setFile] = useState(null);
 
-    const fileInputRef = React.useRef(null);
+    const fileInputRef = useRef(null);
 
-   const socket = io("localhost:8080");
-
-   socket.on('connect', () => {
-    console.log('Connected to server');
-    
-    // Example data to send to the server
-    const connectionData = {
-      userId: currentUser?.id,
-      socket: socket.id
-    };
-
-    // Send data to the server as soon as the connection is established
-    socket.emit('clientData', connectionData);
-    socket.on('recieveMessage',(message) => {
-        setMessages((prevMessages) => [...prevMessages, message]);
-    })
-  });
+    const socketRef = useRef(null);  // Use useRef to persist socket instance
 
   const { currentUser } = useContext(AuthContext);
 
-  useEffect(async() => {
-    const res = await axios
-        .post(
-          "http://localhost:8080/api/message/getMessages",
-          {
-            userId: currentUser?.id,
-            contactId: contact._id,
-          },
-          { withCredentials: true }
-        )
-        .then((e) => {
-          return e.data;
-        })
+  useEffect(() => {
+    // Initialize socket only once using useRef
+    if (!socketRef.current) {
+      socketRef.current = io("localhost:8080");
 
-    if(res){
-        setMessages(res);
+      socketRef.current.on('connect', () => {
+        console.log('Connected to server');
+
+        const connectionData = {
+          userId: currentUser?.id,
+          socket: socketRef.current.id
+        };
+
+        try {
+          socketRef.current.emit('clientData', connectionData);
+          socketRef.current.on('recieveMessage', (message) => {
+            setMessages((prevMessages) => [...prevMessages, message]);
+          });
+        } catch (error) {
+          console.error("Socket event handling failed:", error);
+        }
+      });
     }
-  },[]);
+
+    // Cleanup the socket connection on component unmount
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+        console.log("Disconnected from server");
+      }
+    };
+  }, [currentUser,]); // Add currentUser as a dependency
 
   const sendMessage = () => {
     if (message.trim()) {
-        const senderMessage = {
-            userId: currentUser?.id,
-            text: message
-        }
-        socket.emit('sendMessage', { message, contactId: contact._id, userId: currentUser?.id});  // Emit the message to the server
-        setMessages((prevMessages) => [...prevMessages, senderMessage]);
-        newMessage('');  // Clear the input field after sending the message
+      const senderMessage = {
+        userId: currentUser?.id,
+        text: message
+      };
+
+      // Use socketRef to emit the message
+      socketRef.current.emit('sendMessage', {
+        message,
+        contactId: contact._id,
+        userId: currentUser?.id
+      });
+
+      setMessages((prevMessages) => [...prevMessages, senderMessage]);
+      newMessage('');  // Clear the input field after sending the message
     }
-  }
+  };
 
   const handleChange = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
