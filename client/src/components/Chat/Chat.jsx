@@ -80,8 +80,10 @@ const Chat = ({ contact }) => {
   };
 
   const handleChange = (e) => {
+    console.log(e);
     const selectedFile = e.target.files[0];
     if (selectedFile) {
+        console.log(selectedFile);
       const reader = new FileReader();
       
       reader.onloadend = () => {
@@ -91,6 +93,8 @@ const Chat = ({ contact }) => {
   
       reader.readAsDataURL(selectedFile); // Convert the file to base64 string
     }
+
+    e.target.value = null;
   };
 
   return (
@@ -109,7 +113,7 @@ const Chat = ({ contact }) => {
           message?.userId == currentUser?.id ? (
             <div className="sender">
               <div className="sender-message">
-                {message?.file && <img src={message?.file} alt="" />}
+                {message?.file && <img src={message?.file.startsWith('data:image') ? message?.file : `/images/${message?.file}`} alt="" />}
                 <p>{message?.text}</p>
               </div>
               <div className="sender-image">

@@ -47,7 +47,6 @@ io.on("connection", (socket) => {
             io.to(user.socket).emit('recieveMessage', message)
         }
     })
-
 });
 
   socket.on("disconnect", () => {
