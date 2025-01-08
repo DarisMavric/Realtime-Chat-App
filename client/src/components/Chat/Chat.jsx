@@ -13,7 +13,8 @@ const Chat = ({ contact }) => {
 
     const [message,newMessage] = useState('');
     const [messages,setMessages] = useState([]);
-    const [file,setFile] = useState(null);
+    const [localImage,setLocalImage] = useState(null);
+    const [file,setFile] = useState(null)
 
     const fileInputRef = useRef(null);
 
@@ -22,6 +23,25 @@ const Chat = ({ contact }) => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
+
+    const fetchData = async() => {
+            const res = await axios
+            .post(
+            "http://localhost:8080/api/message/getMessages",
+            {
+                userId: currentUser?.id,
+                contactId: contact._id,
+            },
+            { withCredentials: true }
+            )
+            .then((e) => {
+            return e.data;
+            })
+        if(res){
+            setMessages(res);
+        }
+    }
+    fetchData();
     // Initialize socket only once using useRef
     if (!socketRef.current) {
       socketRef.current = io("localhost:8080");
@@ -55,40 +75,53 @@ const Chat = ({ contact }) => {
     };
   }, [currentUser,]); // Add currentUser as a dependency
 
-  const sendMessage = () => {
-    if (message.trim() || file) {
+  const sendMessage = async() => {
+    if (message.trim() || localImage) {
       const senderMessage = {
         userId: currentUser?.id,
         text: message,
-        file
+        image: localImage
       };
 
-      console.log(senderMessage);
+      try {
+
+        const formData = new FormData();
+
+        // Append fields to FormData, including the file (image)
+        formData.append("userId", currentUser?.id);
+        formData.append("contactId", contact._id);
+        formData.append("text", message);
+        formData.append("image", file);  // If an image is selected, it will be appended here
+
+        const res = await axios.post("http://localhost:8080/api/message/sendMessage", formData, {withCredentials: true});
+      }catch(err){
+        console.log(err);
+      }
 
       // Use socketRef to emit the message
       socketRef.current.emit('sendMessage', {
         message,
-        file,
+        image: localImage,
         contactId: contact._id,
         userId: currentUser?.id
       });
 
       setMessages((prevMessages) => [...prevMessages, senderMessage]);
       newMessage('');  // Clear the input field after sending the message
+      setLocalImage(null);
       setFile(null);
     }
   };
 
   const handleChange = (e) => {
-    console.log(e);
     const selectedFile = e.target.files[0];
+    setFile(selectedFile);
     if (selectedFile) {
-        console.log(selectedFile);
       const reader = new FileReader();
       
       reader.onloadend = () => {
         const base64File = reader.result;
-        setFile(base64File);  // Set the base64 file to state
+        setLocalImage(base64File);  // Set the base64 file to state
       };
   
       reader.readAsDataURL(selectedFile); // Convert the file to base64 string
@@ -113,7 +146,7 @@ const Chat = ({ contact }) => {
           message?.userId == currentUser?.id ? (
             <div className="sender">
               <div className="sender-message">
-                {message?.file && <img src={message?.file.startsWith('data:image') ? message?.file : `/images/${message?.file}`} alt="" />}
+                {message?.image && <img src={message?.image.startsWith('data:image') ? message?.image : `/images/${message?.image}`} alt="" />}
                 <p>{message?.text}</p>
               </div>
               <div className="sender-image">
@@ -126,7 +159,7 @@ const Chat = ({ contact }) => {
                 <img src={icon} alt="" />
               </div>
               <div className="reciever-message">
-                {message?.file && <img src={message?.file} alt="" />}
+                {message?.image && <img src={message?.image} alt="" />}
                 <p>{message?.text}</p>
               </div>
             </div>
