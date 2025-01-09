@@ -4,6 +4,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import userRoutes from "./userRoutes.js"
 import messageRoutes from "./messageRoutes.js"
+import groupRoutes from "./groupRoutes.js"
 import multer from "multer";
 import {app,server} from "./socket/socket.js"
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api/user/',userRoutes)
+app.use('/api/group/',groupRoutes)
 app.use('/api/message/',messageRoutes)
 
 
