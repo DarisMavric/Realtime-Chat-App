@@ -8,7 +8,9 @@ const messageSchema = mongoose.Schema({
     },
     contactId: {    
         type: String,
-        required: true,
+    },
+    groupId: {
+        type: String
     },
     text: {
         type:String,
