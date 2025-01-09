@@ -7,7 +7,7 @@ const groupSchema = mongoose.Schema({
         required: true,
     },
     users: {    
-        type: [Array],
+        type: [String],
         required: true,
     },
     image: {
