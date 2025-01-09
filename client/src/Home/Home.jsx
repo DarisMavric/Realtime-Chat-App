@@ -4,19 +4,32 @@ import Navbar from "../components/Navbar/Navbar";
 import Chat from "../components/Chat/Chat";
 import Contacts from "../components/Contacts/Contacts";
 import Welcome from "../components/Welcome/Welcome";
+import Groups from "../components/Groups/Groups";
 
 const Home = () => {
+  const [chat, setChat] = useState(null);
 
-  const [chat,setChat] = useState(null);
+  const currentPage = window.location.pathname;
+
+  console.log(currentPage);
 
   return (
     <div className="home">
       <Navbar />
       <div className="chatter">
         <div className="chat-and-contacts">
-          <Contacts setChat={setChat}/>
           {
-            chat ? <Chat contact={chat}/> : <Welcome />
+            currentPage === "/" ? (
+              <>
+                <Contacts setChat={setChat} />
+                {chat ? <Chat contact={chat} /> : <Welcome />}
+              </>
+            ) : currentPage === "/groups" ? (
+              <>
+                <Groups setChat={setChat} />
+                {chat ? <Chat contact={chat} /> : <Welcome />}
+              </>
+            ) : null // No fallback, return null or don't render anything
           }
         </div>
       </div>

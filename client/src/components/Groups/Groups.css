@@ -1,0 +1,40 @@
+.contacts {
+    width: 25%;
+    display: block;
+    padding: 10px;
+    border-right: 1px solid white;
+}
+
+.all-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+    color: #D8C4B6;
+}
+
+.contacts .contact {
+    display: flex;
+    margin: 10px;
+    gap: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #D8C4B6;
+    cursor: pointer;
+}
+
+
+
+
+.contact-image img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.contact-name {
+    display: block;
+    align-content: center;
+    color: #213555;;
+    cursor: pointer;
+}

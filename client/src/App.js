@@ -7,7 +7,7 @@ import { Route,BrowserRouter,Routes } from 'react-router-dom';
 import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
 import Profile from './Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
-import Groups from './Groups/Groups';
+import Groups from './components/Groups/Groups';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/groups' element={<Groups/>}/>
+            <Route path='/groups' element={<Home/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/signup' element={<Register/>}/>
             <Route path='/profile' element={<Profile/>}/>
