@@ -39,7 +39,6 @@ export const sendGroupMessage = (req,res) => {
 export const findGroup = async(req,res) => {
     const {id} = req.query;
         if(id){
-            console.log(id);
             const group = await Group.find({users: { $all: id}});
             if(group){
                 res.status(200).json(group);

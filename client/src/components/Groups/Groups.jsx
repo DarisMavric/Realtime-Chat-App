@@ -27,7 +27,7 @@ const Groups = ({ setChat }) => {
   return (
     <div className="contacts">
       <div className="all-contacts">
-        <h1>Contacts</h1>
+        <h1>Groups</h1>
         <hr />
       </div>
       {data?.map(

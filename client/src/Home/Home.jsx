@@ -5,6 +5,7 @@ import Chat from "../components/Chat/Chat";
 import Contacts from "../components/Contacts/Contacts";
 import Welcome from "../components/Welcome/Welcome";
 import Groups from "../components/Groups/Groups";
+import GroupChat from "../components/GroupChat/GroupChat";
 
 const Home = () => {
   const [chat, setChat] = useState(null);
@@ -27,7 +28,7 @@ const Home = () => {
             ) : currentPage === "/groups" ? (
               <>
                 <Groups setChat={setChat} />
-                {chat ? <Chat contact={chat} /> : <Welcome />}
+                {chat ? <GroupChat group={chat} /> : <Welcome />}
               </>
             ) : null // No fallback, return null or don't render anything
           }
