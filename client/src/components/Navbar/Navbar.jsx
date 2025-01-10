@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { FaSnapchat } from "react-icons/fa6";
 import { BsChatRightDots } from "react-icons/bs";
+import { MdGroup } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -24,6 +25,12 @@ const Navbar = () => {
               className={window.location.pathname === "/" ? "active" : ""}
             >
               <BsChatRightDots />
+            </li>
+            <li
+              onClick={() => navigate('/groups')}
+              className={window.location.pathname === "/groups" ? "active" : ""}
+            >
+              <MdGroup />
             </li>
           </ul>
         </div>

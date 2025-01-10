@@ -14,10 +14,12 @@ const io = new Server(server, {
 const socketUserMap = [];
 
 io.on("connection", (socket) => {
+  socket.on("groupData", (data) => {
+    socket.join(data.groupId);
+  });
 
   socket.on("clientData", (data) => {
     let userFound = false; // Flag to track if user exists
-
 
     // Iterate over socketUserMap to find the user and update their socket
     socketUserMap.forEach((user) => {
@@ -35,24 +37,31 @@ io.on("connection", (socket) => {
     // Log the updated socketUserMap
   });
 
-
-  socket.on('sendMessage', (data) => {
+  socket.on("sendMessage", (data) => {
     socketUserMap.map((user) => {
-        if(user.userId === data.contactId){
-            const message = {
-                userId: data.userId,
-                contactId: data.contactId,
-                text: data.message,
-                image: data?.image || null
-            }
-            io.to(user.socket).emit('recieveMessage', message)
-        }
-    })
-});
-
-  socket.on("disconnect", () => {
-
+      if (user.userId === data.contactId) {
+        const message = {
+          userId: data.userId,
+          contactId: data.contactId,
+          text: data.message,
+          image: data?.image || null,
+        };
+        io.to(user.socket).emit("recieveMessage", message);
+      }
+    });
   });
+
+  socket.on("sendGroupMessage", (data) => {
+        const message = {
+          userId: data.userId,
+          groupId: data.groupId,
+          text: data.message,
+          image: data?.image || null,
+        };
+        io.to(data.groupId).emit("recieveGroupMessage", message);
+  });
+
+  socket.on("disconnect", () => {});
 });
 
 export { app, io, server };

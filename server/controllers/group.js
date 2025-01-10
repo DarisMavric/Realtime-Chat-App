@@ -43,7 +43,7 @@ export const findGroup = async(req,res) => {
             if(group){
                 res.status(200).json(group);
             } else {
-                res.status(400).json('User does not exist!');
+                res.status(400).json('No Groups');
             }
         } else {
             res.status(400).json("Error");

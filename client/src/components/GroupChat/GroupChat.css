@@ -12,13 +12,13 @@
     margin: 15px;
 }
 
-.chat-title .contact-image img{
+.chat-title .group-image img{
     width: 60px;
     height: 60px;
     border-radius: 50%;
 }
 
-.chat-title .contact-name {
+.chat-title .group-name {
     display: block;
     align-content: center;
     color: #D8C4B6;

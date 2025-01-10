@@ -10,7 +10,6 @@ import { io, Socket } from "socket.io-client";
 import test from "../Chat/test.jpg"
 
 const GroupChat = ({ group }) => {
-  console.log(group);
   const [message, newMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [localImage, setLocalImage] = useState(null);
@@ -20,12 +19,10 @@ const GroupChat = ({ group }) => {
 
   const socketRef = useRef(null); // Use useRef to persist socket instance
 
-  console.log(socketRef.current);
-
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchData = async () => {
+    /* const fetchData = async () => {
       const res = await axios
         .post(
           "http://localhost:8080/api/message/getMessages",
@@ -38,10 +35,11 @@ const GroupChat = ({ group }) => {
           return e.data;
         });
       if (res) {
+        console.log(res);
         setMessages(res);
-      }
-    };
-    fetchData();
+      } 
+    }; 
+    fetchData(); */
     // Initialize socket only once using useRef
     if (socketRef.current) {
       socketRef.current.disconnect();
@@ -50,19 +48,20 @@ const GroupChat = ({ group }) => {
     socketRef.current = io("localhost:8080");
 
     socketRef.current.on("connect", () => {
-      console.log("Connected to server");
 
-      const connectionData = {
-        userId: currentUser?.id,
+      const groupData = {
         socket: socketRef.current.id,
+        userId: currentUser?.id,
+        groupId: group._id
       };
 
       try {
-        socketRef.current.emit("clientData", connectionData);
-        socketRef.current.on("recieveMessage", (message) => {
-            if(message.userId === group._id ){
+        socketRef.current.emit("groupData", groupData);
+        socketRef.current.on("recieveGroupMessage", (message) => {
+            
                 setMessages((prevMessages) => [...prevMessages, message]);
-            }
+                console.log(message);
+            
         });
       } catch (error) {
         console.error("Socket event handling failed:", error);
@@ -76,7 +75,7 @@ const GroupChat = ({ group }) => {
         console.log("Disconnected from server");
       }
     };
-  }, [group._id]); // Add currentUser as a dependency
+  }, [group._id,currentUser]); // Add currentUser as a dependency
 
   const sendMessage = async () => {
     if (message.trim() || localImage) {
@@ -95,21 +94,20 @@ const GroupChat = ({ group }) => {
       formData.append("text", message);
       formData.append("image", file); // If an image is selected, it will be appended here
 
-      const res = await axios.post(
+      /* const res = await axios.post(
         "http://localhost:8080/api/message/sendMessage",
         formData,
         { withCredentials: true }
-      );
+      ); */
 
       // Use socketRef to emit the message
-      socketRef.current.emit("sendMessage", {
+      socketRef.current.emit("sendGroupMessage", {
         message,
         image: localImage,
         groupId: group._id,
         userId: currentUser?.id,
       });
-
-      setMessages((prevMessages) => [...prevMessages, senderMessage]);
+      
       newMessage(""); // Clear the input field after sending the message
       setLocalImage(null);
       setFile(null);

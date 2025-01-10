@@ -19,11 +19,6 @@ const Groups = ({ setChat }) => {
     queryKey: ["groups"],
   });
 
-
-  if(data) {
-    console.log(data);
-  }
-
   return (
     <div className="contacts">
       <div className="all-contacts">
