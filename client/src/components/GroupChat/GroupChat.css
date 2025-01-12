@@ -1,37 +1,38 @@
-.chat {
+.group {
     flex-grow: 1;
+    width: 100%;
     display: flex;
     flex-direction: column; /* Arrange children vertically */
     height: 100vh;
     overflow: hidden;
 }
 
-.chat .chat-title {
+.group .group-title {
     display: flex;
     gap: 5px;
     margin: 15px;
 }
 
-.chat-title .group-image img{
+.group-title .group-image img{
     width: 60px;
     height: 60px;
     border-radius: 50%;
 }
 
-.chat-title .group-name {
+.group-title .group-name {
     display: block;
     align-content: center;
     color: #D8C4B6;
     cursor: pointer;
 }
 
-.chat .chat-messages {
+.group .group-messages {
     display: block;
     overflow-y: auto;
     flex-grow: 1;
 }
 
-.chat .chat-messages .sender {
+.group .group-messages .sender {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -39,18 +40,18 @@
     margin: 10px;
 }
 
-.chat .chat-messages .sender .sender-image {
+.group .group-messages .sender .sender-image {
     height: 50px;
     width: 50px;
 }
 
-.chat .chat-messages .sender .sender-image img{
+.group .group-messages .sender .sender-image img{
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
 
-.chat .chat-messages .sender .sender-message{
+.group .group-messages .sender .sender-message{
     padding: 10px;                            /* Adds padding inside the div */
     border-top-left-radius: 10px;             /* Rounded top-left corner */
     border-top-right-radius: 10px;            /* Rounded top-right corner */
@@ -63,12 +64,12 @@
     background-color: #D8C4B6;                 /* Sets the background color to black */  
 }
 
-.chat .chat-messages .sender .sender-message img{
-    width: 100%;
+.group .group-messages .sender .sender-message img{
+    width: 100px;
     height: 100px;                 /* Sets the background color to black */  
 }
 
-.chat .chat-messages .reciever {
+.group .group-messages .reciever {
     margin: 10px;
     display: flex;
     justify-content: flex-start;
@@ -76,18 +77,18 @@
     gap: 5px;
 }
 
-.chat .chat-messages .reciever .reciever-image {
+.group .group-messages .reciever .reciever-image {
     width: 50px;
     height: 50px;
 }
 
-.chat .chat-messages .reciever .reciever-image img{
+.group .group-messages .reciever .reciever-image img{
     height: 50px;
     width: 50px;
     border-radius: 50%;
 }
 
-.chat .chat-messages .reciever .reciever-message{
+.group .group-messages .reciever .reciever-message{
     padding: 10px;                            /* Adds padding inside the div */
     border-top-left-radius: 20px;             /* Rounded top-left corner */
     border-top-right-radius: 20px;            /* Rounded top-right corner */
@@ -100,12 +101,12 @@
     background-color: #3E5879; 
 }
 
-.chat .chat-messages .reciever .reciever-message img{
+.group .group-messages .reciever .reciever-message img{
     width: 100%;
     height: 100px;                 /* Sets the background color to black */  
 }
 
-.chat .send-message {
+.group .send-message {
     height: 50px;
     width: 100%;
     display: flex;
@@ -114,11 +115,11 @@
     margin: 10px;
 }
 
-.chat .send-message input::placeholder {
+.group .send-message input::placeholder {
     color: white;
 }
 
-.chat .send-message input {
+.group .send-message input {
     width: 85%;
     height: 50px;
     border-radius: 10px;
@@ -129,6 +130,6 @@
     padding: 10px;
 }
 
-.chat .send-message {
+.group .send-message {
     color: #D8C4B6;
 }

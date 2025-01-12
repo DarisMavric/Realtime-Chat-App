@@ -9,6 +9,7 @@ import GroupChat from "../components/GroupChat/GroupChat";
 
 const Home = () => {
   const [chat, setChat] = useState(null);
+  const [group, setGroup] = useState(null);
 
   const currentPage = window.location.pathname;
 
@@ -27,8 +28,8 @@ const Home = () => {
               </>
             ) : currentPage === "/groups" ? (
               <>
-                <Groups setChat={setChat} />
-                {chat ? <GroupChat group={chat} /> : <Welcome />}
+                <Groups setGroup={setGroup} />
+                {group ? <GroupChat group={group} /> : <Welcome />}
               </>
             ) : null // No fallback, return null or don't render anything
           }

@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 
-const Groups = ({ setChat }) => {
+const Groups = ({ setGroup }) => {
   const { currentUser } = useContext(AuthContext);
 
   const { data, isLoading } = useQuery({
@@ -30,7 +30,7 @@ const Groups = ({ setChat }) => {
           (
             <div
               className="contact"
-              onClick={() => setChat(group)}
+              onClick={() => setGroup(group)}
             >
               <div className="contact-image">
                 <img src={`/images/${group?.image}`} alt="" />

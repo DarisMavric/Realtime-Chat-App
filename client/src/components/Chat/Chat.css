@@ -1,5 +1,6 @@
 .chat {
     flex-grow: 1;
+    width: 100%;
     display: flex;
     flex-direction: column; /* Arrange children vertically */
     height: 100vh;
@@ -60,12 +61,14 @@
     word-break: break-word;                   /* Ensures the text breaks when necessary */
     white-space: normal;                      /* Makes sure text wraps at word boundaries */
     color: #213555;                             /* Sets the text color to white */
-    background-color: #D8C4B6;                 /* Sets the background color to black */  
+    background-color: #D8C4B6; 
+    font-size: 15px;
+    font-weight: 500;                
 }
 
 .chat .chat-messages .sender .sender-message img{
-    width: 100%;
-    height: 100px;                 /* Sets the background color to black */  
+    width: 100px;
+    height: 100px;             
 }
 
 .chat .chat-messages .reciever {
@@ -97,7 +100,9 @@
     word-break: break-word;                   /* Ensures the text breaks when necessary */
     white-space: normal;                      /* Makes sure text wraps at word boundaries */
     color: white;                             /* Sets the text color to white */
-    background-color: #3E5879; 
+    background-color: #3E5879;
+    font-size: 15px;
+    font-weight: 500; 
 }
 
 .chat .chat-messages .reciever .reciever-message img{

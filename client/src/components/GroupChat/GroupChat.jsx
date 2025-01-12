@@ -107,7 +107,7 @@ const GroupChat = ({ group }) => {
         groupId: group._id,
         userId: currentUser?.id,
       });
-      
+
       newMessage(""); // Clear the input field after sending the message
       setLocalImage(null);
       setFile(null);
@@ -132,17 +132,19 @@ const GroupChat = ({ group }) => {
   };
 
   return (
-    <div className="chat">
-      <div className="chat-title">
+    <div className="group">
+      <div className="group-title">
         <div className="group-image">
-          <img src={`/images/${group?.image}`} alt="" />
+          {message?.image && (
+              <img src={`/images/${message?.image}`} alt="" />
+          )}
         </div>
         <div className="group-name">
           <h2>{group?.name}</h2>
           <p>Online</p>
         </div>
       </div>
-      <div className="chat-messages">
+      <div className="group-messages">
         {messages?.map((message) =>
           message?.userId === currentUser?.id ? (
             <div className="sender">
@@ -159,15 +161,9 @@ const GroupChat = ({ group }) => {
                 )}
                 <p>{message?.text}</p>
               </div>
-              <div className="sender-image">
-                <img src={icon} alt="" />
-              </div>
             </div>
           ) : (
             <div className="reciever">
-              <div className="reciever-image">
-                <img src={icon} alt="" />
-              </div>
               <div className="reciever-message">
                 {message?.image && (
                   <img

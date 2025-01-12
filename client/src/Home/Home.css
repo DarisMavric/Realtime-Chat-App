@@ -5,13 +5,15 @@
 }
 
 .chatter {
+    flex-grow: 1;
     display: flex;
-  flex-grow: 1; /* This makes it take the remaining space */
+    width: 100%;
   flex-direction: column;
 }
 
 .chat-and-contacts {
     flex-grow: 1;
+    width: 100%;
     background-color: #213555;
     display: flex;
 }
