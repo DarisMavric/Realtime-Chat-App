@@ -128,7 +128,7 @@ const Profile = () => {
             <div className="info">
               <div className="member-since">
                 <p>Member Since</p>
-                <p>{data?.createdAt}</p>
+                <p>{new Date(data?.createdAt).toLocaleDateString('en-CA')}</p>
               </div>
               <hr />
               <div className="account-status">

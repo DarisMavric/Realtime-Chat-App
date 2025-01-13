@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import icon from "../../Home/user-avatar-male-5.png";
 import { FaUserFriends } from "react-icons/fa";
 import { IoChatbox } from "react-icons/io5";
@@ -9,6 +9,7 @@ import { AuthContext } from "../../Context/AuthContext";
 
 const Contacts = ({ setChat }) => {
   const { currentUser } = useContext(AuthContext);
+  const [messages,setMessages] = useState({});
 
   const { data, isLoading } = useQuery({
     queryFn: () =>
@@ -17,6 +18,34 @@ const Contacts = ({ setChat }) => {
       }),
     queryKey: ["users"],
   });
+
+  useEffect(() => {
+    const findContacts = async() => {
+      const res = await axios.get("http://localhost:8080/api/user/getUsers").then((e) => {
+        return e.data;
+      })
+  
+      if(res) {
+        console.log(res)
+      }
+    }
+  
+    const groupMessages = async() => {
+      const res = await axios.post("http://localhost:8080/api/message/getMessages")
+      .then((e) => {
+        return e.data;
+      });
+  
+      if(res) {
+        setMessages(res);
+      }
+    }
+  
+    groupMessages();
+    findContacts();
+
+  },[currentUser?.id])
+
 
   return (
     <div className="contacts">
@@ -36,7 +65,7 @@ const Contacts = ({ setChat }) => {
               </div>
               <div className="contact-name">
                 <h2>{user?.fullName}</h2>
-                <p>{user?.about ? user.about : "Hey there"}</p>
+                <p>{messages[user?._id+'-'+currentUser?.id]?.text || messages[currentUser?.id+'-'+user?._id]?.text}</p>
               </div>
             </div>
           )

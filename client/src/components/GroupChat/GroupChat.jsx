@@ -131,6 +131,7 @@ const GroupChat = ({ group }) => {
     e.target.value = null;
   };
 
+
   return (
     <div className="group">
       <div className="group-title">
@@ -141,7 +142,7 @@ const GroupChat = ({ group }) => {
         </div>
         <div className="group-name">
           <h2>{group?.name}</h2>
-          <p>Online</p>
+          <p>{group?.usernames.join(", ")}</p>
         </div>
       </div>
       <div className="group-messages">

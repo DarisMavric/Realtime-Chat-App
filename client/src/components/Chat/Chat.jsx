@@ -161,15 +161,10 @@ const Chat = ({ contact }) => {
                 )}
                 <p>{message?.text}</p>
               </div>
-              <div className="sender-image">
-                <img src={icon} alt="" />
-              </div>
             </div>
           ) : (
             <div className="reciever">
-              <div className="reciever-image">
-                <img src={icon} alt="" />
-              </div>
+
               <div className="reciever-message">
                 {message?.image && (
                   <img
