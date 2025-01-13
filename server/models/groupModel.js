@@ -6,6 +6,10 @@ const groupSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    usernames: {
+        type: [String],
+        requried: true,
+    },
     users: {    
         type: [String],
         required: true,

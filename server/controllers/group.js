@@ -6,9 +6,9 @@ import jwt from "jsonwebtoken";
 
 export const createGroup = async(req,res) => {
    upload.single('image')(req, res, async(err) => {
-           const {name,users} = req.body;
+           const {name,users,usernames} = req.body;
            const image = req.file;
-           if(!name || !users) {
+           if(!name || !users || !usernames) {
                return res.status(400).json('All fields are mandatory')
            }
            try {
@@ -17,6 +17,7 @@ export const createGroup = async(req,res) => {
                    const newGroup = await Group.create({
                        name,
                        users,
+                       usernames,
                        image: image?.filename || null
                    })
                    if(newGroup){

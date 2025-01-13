@@ -53,24 +53,56 @@ export const getMessages = async(req,res) => {
     const {userId,contactId,groupId} = req.body;
 
     if(!groupId){
-        try {
-            const verifyToken = jwt.verify(req.cookies.accessToken, process.env.SECRET_KEY);
-            if(verifyToken){
-                const findChat = await Message.find({$and: [{
-                    $or: 
-                    [
-                        {userId: userId,contactId:contactId},
-                        {userId: contactId,contactId:userId}
-                    ]
-                }]});
+        if(userId && contactId){
+            try {
+                const verifyToken = jwt.verify(req.cookies.accessToken, process.env.SECRET_KEY);
+                if(verifyToken){
+                    const findChat = await Message.find({$and: [{
+                        $or: 
+                        [
+                            {userId: userId,contactId:contactId},
+                            {userId: contactId,contactId:userId}
+                        ]
+                    }]});
+                    if(findChat){
+                        return res.status(200).json(findChat);
+                    } else {
+                        return res.status(200).json("no messages")
+                    }
+                }
+            } catch (err) {
+                res.status(400).json("Invalid Token")
+            }
+        } else {
+            try {
+                const findChat = await Message.find();
                 if(findChat){
-                    return res.status(200).json(findChat);
+                    const obj = {} 
+                    findChat.map((chat) => {
+                        if(chat.contactId){
+                            const key = [chat.userId, chat.contactId].sort().join('-'); // Sort and join to ensure the order is consistent
+
+                            // Check if this key already exists or if the current chat's createdAt is later
+                            if (!obj[key] || chat.createdAt > obj[key].createdAt) {
+                                obj[key] = { createdAt: chat.createdAt, text: chat.text };
+                            }   
+                        } else {
+                            const key = [chat.userId, chat.groupId].sort().join('-'); // Sort and join to ensure the order is consistent
+
+                            // Check if this key already exists or if the current chat's createdAt is later
+                            if (!obj[key] || chat.createdAt > obj[key].createdAt) {
+                                obj[key] = { createdAt: chat.createdAt, text: chat.text };
+                            } 
+                        }
+                    })
+                    return res.status(200).json(obj);
                 } else {
                     return res.status(200).json("no messages")
                 }
+                
+            } catch (err) {
+                res.status(400).json("Invalid Token")
             }
-        } catch (err) {
-            res.status(400).json("Invalid Token")
         }
     } else {
         try {

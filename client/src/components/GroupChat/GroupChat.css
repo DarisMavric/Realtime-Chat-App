@@ -51,6 +51,13 @@
     border-radius: 50%;
 }
 
+.group .group-messages .sender .sender-message .sender-name {
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #3E5879;
+    font-weight: 500;
+}
+
 .group .group-messages .sender .sender-message{
     padding: 10px;                            /* Adds padding inside the div */
     border-top-left-radius: 10px;             /* Rounded top-left corner */
@@ -86,6 +93,13 @@
     height: 50px;
     width: 50px;
     border-radius: 50%;
+}
+
+.group .group-messages .reciever .reciever-message .reciever-name {
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #D8C4B6;
+    font-weight: 500;
 }
 
 .group .group-messages .reciever .reciever-message{

@@ -22,7 +22,7 @@ const GroupChat = ({ group }) => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    /* const fetchData = async () => {
+    const fetchData = async () => {
       const res = await axios
         .post(
           "http://localhost:8080/api/message/getMessages",
@@ -39,7 +39,7 @@ const GroupChat = ({ group }) => {
         setMessages(res);
       } 
     }; 
-    fetchData(); */
+    fetchData(); 
     // Initialize socket only once using useRef
     if (socketRef.current) {
       socketRef.current.disconnect();
@@ -94,11 +94,11 @@ const GroupChat = ({ group }) => {
       formData.append("text", message);
       formData.append("image", file); // If an image is selected, it will be appended here
 
-      /* const res = await axios.post(
+      const res = await axios.post(
         "http://localhost:8080/api/message/sendMessage",
         formData,
         { withCredentials: true }
-      ); */
+      ); 
 
       // Use socketRef to emit the message
       socketRef.current.emit("sendGroupMessage", {
@@ -150,6 +150,7 @@ const GroupChat = ({ group }) => {
           message?.userId === currentUser?.id ? (
             <div className="sender">
               <div className="sender-message">
+              <div className="sender-name">{currentUser?.fullName}</div>
                 {message?.image && (
                   <img
                     src={
@@ -166,6 +167,7 @@ const GroupChat = ({ group }) => {
           ) : (
             <div className="reciever">
               <div className="reciever-message">
+              <div className="reciever-name">Daka</div>
                 {message?.image && (
                   <img
                     src={

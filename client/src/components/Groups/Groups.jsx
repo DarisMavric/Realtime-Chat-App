@@ -59,6 +59,7 @@ const Groups = ({ setGroup }) => {
     <div className="contacts">
       <div className="all-contacts">
         <h1>Groups</h1>
+        <button>create group</button>
         <hr />
       </div>
       {data?.map(
@@ -69,11 +70,11 @@ const Groups = ({ setGroup }) => {
               onClick={() => setGroup(group)}
             >
               <div className="contact-image">
-                <img src={`/images/${group?.image}`} alt="" />
+                <img src={icon} alt="" />
               </div>
               <div className="contact-name">
                 <h2>{group?.name}</h2>
-                <p>asdas</p>
+                <p>{messages[group?._id+'-'+currentUser?.id]?.text || messages[currentUser?.id+'-'+group?._id]?.text}</p>
               </div>
             </div>
           )
