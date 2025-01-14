@@ -3,13 +3,18 @@ import icon from "../../Home/user-avatar-male-5.png";
 import './createGroup.css';
 import { MdClose } from "react-icons/md";
 import axios from 'axios';
+import {useFormik} from 'formik'
+import * as Yup from "yup";
 
 const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
   // State to store users, search query, and added users
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [addedUsers, setAddedUsers] = useState([]);  // State to store the added users
+  const [addedUsers, setAddedUsers] = useState([]);  // State to store the added users\
+  const [addedUsersId,setAddedUsersId] = useState([]);
+  const [addedUserNames,setAddedUserNames] = useState([]);
+
 
   // Fetch users from the API
   useEffect(() => {
@@ -41,18 +46,75 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
 
   // Add user to the added users list
   const handleAddUser = (user) => {
-    // Prevent adding a user that's already in the added users list
-    if (!addedUsers.find((addedUser) => addedUser.id === user._id)) {
-      setAddedUsers([...addedUsers, user]);
+    // Prevent adding a user that's already in the added users list by checking their ID
+    if (!addedUsers.find((addedUser) => addedUser._id === user._id)) {
+      // Add the user object to addedUsers array
+      setAddedUsers((prevAddedUsers) => [...prevAddedUsers, user]);
+      
+      // Add the user's ID (as a string) to addedUsersId array
+      setAddedUsersId((prevIds) => [...prevIds, user._id]);
+      
+      // Add the user's fullName to addedUserNames array
+      setAddedUserNames((prevNames) => [...prevNames, user.fullName]);
     }
   };
 
   // Remove user from the added users list
-  const handleRemoveUser = (userId) => {
-    setAddedUsers(prevAddedUsers => 
-      prevAddedUsers.filter((user) => user._id !== userId)
+  const handleRemoveUser = (removeUser) => {
+    setAddedUsers((prevAddedUsers) =>
+      prevAddedUsers.filter((user) => user._id !== removeUser._id)
+    );
+  
+    setAddedUsersId((prevAddedUsersId) =>
+      prevAddedUsersId.filter((userId) => userId !== removeUser._id)
+    );
+  
+    setAddedUserNames((prevAddedUserNames) =>
+      prevAddedUserNames.filter((fullName) => fullName !== removeUser.fullName)
     );
   };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      image: "",
+    },
+
+    enableReinitialize: true,
+
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .required("Name of Group is Required!")
+        .min(3, "Minimum length of Group Name should be 3 characters!"),
+    }),
+
+
+    onSubmit: async (values) => {
+
+
+      
+      const formData = new FormData();
+
+  // Append fields to FormData, including the file (image)
+      formData.append("name", formik.values.name);
+      formData.append("image", formik.values.image);  // If an image is selected, it will be appended here
+      addedUsersId.forEach(id => {
+        formData.append("users[]", id);
+      });  // Serialize addedUsers to JSON string
+      addedUserNames.forEach(name => {
+        formData.append("usernames[]", name);
+      });
+      try {
+        const res = await axios.post("http://localhost:8080/api/group/createGroup", formData, {
+          withCredentials: true
+        });
+
+        setIsModalOpen(false);
+      }catch(err){
+        console.log(err)
+      }
+    },
+  });
 
   // Function to close the modal
   const closeModal = (e, clickedOutside = false) => {
@@ -62,6 +124,9 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
       setIsModalOpen(false);
     }
   };
+
+  console.log(addedUserNames);
+  console.log(addedUsersId);
 
   return (
     <div className="create-group modal">
@@ -73,7 +138,7 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
               <MdClose className="close-modal-btn" onClick={(e) => closeModal(e)} />
             </div>
             <div className="modal-content">
-              <input type="text" name="name" placeholder="Group Name" />
+              <input type="text" name="name" value={formik.values.name} placeholder="Group Name" onChange={formik.handleChange}/>
               <input
                 type="text"
                 name="adduser"
@@ -86,7 +151,7 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
                 {addedUsers.map((user) => (
                   <div key={user._id} className="added-user">
                     <span>{user.fullName}</span>
-                    <button onClick={() => handleRemoveUser(user._id)} className="remove-user-btn">
+                    <button onClick={() => handleRemoveUser(user)} className="remove-user-btn">
                       X
                     </button>
                   </div>
@@ -118,7 +183,7 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
               </div>
 
               <div className="button">
-                <p>Click</p>
+                <p onClick={formik.handleSubmit}>Click</p>
               </div>
             </div>
           </div>
