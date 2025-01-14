@@ -1,0 +1,112 @@
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.modal-wrapper {
+    width: 500px;
+    height: 550px;
+    background: #3E5879;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+
+
+.close-modal-btn {
+    color: black;
+    position:absolute;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    font-weight: 10px;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+}
+
+.modal-content {
+    margin-top: 20px;
+}
+
+.modal-content input {
+    margin-top: 15px;
+    width: 100%;
+    height: 40px;
+    font-size: 15px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid #D8C4B6;
+}
+
+.modal-content .user{
+    margin-top: 10px;
+    display: flex;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+}
+
+.modal-content .user:hover {
+    background-color: blue;
+    color: black;
+}
+
+.modal-content .user .image{
+    height: 50px;
+    width: 50px;
+}
+
+.modal-content .user .name-bio h1 {
+    font-size: 20px;
+}
+
+.modal-content .added-users {
+    margin-top: 10px;
+    display: flex;
+}
+
+.modal-content .user .name-bio{
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50px;
+}
+
+.modal-content .button {
+    cursor: pointer;
+    margin-top: 20px;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    width: 50px;
+    float: right;
+    justify-content: center;
+    align-items: center;
+    background-color: #D8C4B6;
+    color: #3E5879;
+}
+
+.hide {
+    display: none;
+}

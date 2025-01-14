@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import icon from "../../Home/user-avatar-male-5.png";
-import { FaUserFriends } from "react-icons/fa";
-import { IoChatbox } from "react-icons/io5";
 import "./Groups.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
+import CreateGroup from "../CreateGroup/createGroup";
 
 const Groups = ({ setGroup }) => {
   const { currentUser } = useContext(AuthContext);
   const [messages,setMessages] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [users,setUsers] = useState([]);
 
 
   const { data, isLoading } = useQuery({
@@ -22,15 +23,6 @@ const Groups = ({ setGroup }) => {
   });
 
   useEffect(() => {
-    const findContacts = async() => {
-      const res = await axios.get("http://localhost:8080/api/user/getUsers").then((e) => {
-        return e.data;
-      })
-  
-      if(res) {
-        console.log(res)
-      }
-    }
   
     const groupMessages = async() => {
       const res = await axios.post("http://localhost:8080/api/message/getMessages")
@@ -44,22 +36,20 @@ const Groups = ({ setGroup }) => {
     }
   
     groupMessages();
-    findContacts();
 
   },[currentUser?.id])
 
-  console.log(data);
-
-
-  
-
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
 
   return (
     <div className="contacts">
       <div className="all-contacts">
         <h1>Groups</h1>
-        <button>create group</button>
+        <button onClick={openModal}>Open Modal</button>
+        <CreateGroup setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>
         <hr />
       </div>
       {data?.map(
