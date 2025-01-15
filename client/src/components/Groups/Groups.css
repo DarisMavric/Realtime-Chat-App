@@ -13,6 +13,26 @@
     color: #D8C4B6;
 }
 
+.all-contacts .create-group-btn{
+    border: 2px solid #D8C4B6;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #D8C4B6;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.all-contacts .create-group-btn:hover {
+    background-color: #D8C4B6;
+    color: #213555;
+}
+
+
 .contacts .contact {
     display: flex;
     margin: 10px;

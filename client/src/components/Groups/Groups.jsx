@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import CreateGroup from "../CreateGroup/createGroup";
+import { CiCirclePlus } from "react-icons/ci";;
 
 const Groups = ({ setGroup }) => {
   const { currentUser } = useContext(AuthContext);
@@ -48,7 +49,7 @@ const Groups = ({ setGroup }) => {
     <div className="contacts">
       <div className="all-contacts">
         <h1>Groups</h1>
-        <button onClick={openModal}>Open Modal</button>
+        <button onClick={openModal} className="create-group-btn">Create New Group <CiCirclePlus  style={{fontSize: "30px"}}/></button>
         <CreateGroup
           setIsModalOpen={setIsModalOpen}
           isModalOpen={isModalOpen}
