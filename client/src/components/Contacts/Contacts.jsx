@@ -47,6 +47,9 @@ const Contacts = ({ setChat }) => {
   },[currentUser?.id])
 
 
+  console.log(messages);
+
+
   return (
     <div className="contacts">
       <div className="all-contacts">

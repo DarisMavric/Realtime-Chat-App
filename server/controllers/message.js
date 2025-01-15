@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 
 export const sendMessage = async(req,res) => {
     upload.single('image')(req, res, async(err) => {
-        const {userId,contactId,groupId,text} = req.body;
+        const {userId,contactId,groupId,text,username} = req.body;
         const image = req.file;
         if(!groupId){
             try {
@@ -34,6 +34,7 @@ export const sendMessage = async(req,res) => {
                         userId,
                         groupId,
                         text,
+                        username,
                         image: image?.filename || null
                     })
                     if(newMessage){
@@ -87,11 +88,11 @@ export const getMessages = async(req,res) => {
                                 obj[key] = { createdAt: chat.createdAt, text: chat.text };
                             }   
                         } else {
-                            const key = [chat.userId, chat.groupId].sort().join('-'); // Sort and join to ensure the order is consistent
+                            const key = [chat.groupId];
 
                             // Check if this key already exists or if the current chat's createdAt is later
                             if (!obj[key] || chat.createdAt > obj[key].createdAt) {
-                                obj[key] = { createdAt: chat.createdAt, text: chat.text };
+                                obj[key] = { createdAt: chat.createdAt, text: chat.text,userId: chat.userId };
                             } 
                         }
                     })

@@ -125,9 +125,6 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
     }
   };
 
-  console.log(addedUserNames);
-  console.log(addedUsersId);
-
   return (
     <div className="create-group modal">
       {isModalOpen && (
@@ -151,9 +148,7 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
                 {addedUsers.map((user) => (
                   <div key={user._id} className="added-user">
                     <span>{user.fullName}</span>
-                    <button onClick={() => handleRemoveUser(user)} className="remove-user-btn">
-                      X
-                    </button>
+                    <MdClose onClick={() => handleRemoveUser(user)} className="remove-user-btn" style={{width: "20px",height: "20px",cursor: "pointer"}}/>
                   </div>
                 ))}
               </div>
@@ -164,7 +159,7 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
                   <p>No users found</p>
                 ) : (
                   filteredUsers.map((user) => (
-                    <div key={user._id} className="user">
+                    <div key={user._id} className="user" onClick={() => handleAddUser(user)}>
                       <div className="image">
                         <img
                           src={`/images/${user?.image}`}
@@ -175,7 +170,6 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
                       <div className="name-bio">
                         <h1>{user?.fullName || 'Unknown User'}</h1>
                         <p>{user?.about || 'No bio available'}</p>
-                        <button onClick={() => handleAddUser(user)}>Add</button>
                       </div>
                     </div>
                   ))
@@ -183,7 +177,7 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
               </div>
 
               <div className="button">
-                <p onClick={formik.handleSubmit}>Click</p>
+                <p onClick={formik.handleSubmit}>Create Group</p>
               </div>
             </div>
           </div>

@@ -35,7 +35,6 @@ const GroupChat = ({ group }) => {
           return e.data;
         });
       if (res) {
-        console.log(res);
         setMessages(res);
       } 
     }; 
@@ -84,6 +83,7 @@ const GroupChat = ({ group }) => {
         groupId: group._id,
         text: message,
         image: localImage,
+        username: currentUser?.fullName
       };
 
       const formData = new FormData();
@@ -106,6 +106,7 @@ const GroupChat = ({ group }) => {
         image: localImage,
         groupId: group._id,
         userId: currentUser?.id,
+        username: currentUser?.fullName
       });
 
       newMessage(""); // Clear the input field after sending the message
@@ -132,6 +133,7 @@ const GroupChat = ({ group }) => {
   };
 
 
+
   return (
     <div className="group">
       <div className="group-title">
@@ -150,7 +152,6 @@ const GroupChat = ({ group }) => {
           message?.userId === currentUser?.id ? (
             <div className="sender">
               <div className="sender-message">
-              <div className="sender-name">{currentUser?.fullName}</div>
                 {message?.image && (
                   <img
                     src={
@@ -167,7 +168,7 @@ const GroupChat = ({ group }) => {
           ) : (
             <div className="reciever">
               <div className="reciever-message">
-              <div className="reciever-name">Daka</div>
+              <div className="reciever-name">{message?.username}</div>
                 {message?.image && (
                   <img
                     src={

@@ -16,6 +16,9 @@ const messageSchema = mongoose.Schema({
         type:String,
         required: [true, "Please add the Full Name"],
     },
+    username: {
+        type: String
+    },
     image: {
         type:String,
     },

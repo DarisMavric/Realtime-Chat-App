@@ -56,7 +56,9 @@ io.on("connection", (socket) => {
           userId: data.userId,
           groupId: data.groupId,
           text: data.message,
+          username: data.username,
           image: data?.image || null,
+
         };
         io.to(data.groupId).emit("recieveGroupMessage", message);
   });
