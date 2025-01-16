@@ -34,7 +34,7 @@ export const sendMessage = async(req,res) => {
                         userId,
                         groupId,
                         text,
-                        username,
+                        username: username,
                         image: image?.filename || null
                     })
                     if(newMessage){
