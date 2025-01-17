@@ -26,11 +26,29 @@
     cursor: pointer;
 }
 
+.group-title .group-name h2 {
+    font-size: 30px;
+}
+
+.group-title .group-name p {
+    font-size: 15px;
+}
+
 .group .group-messages {
     display: block;
     overflow-y: auto;
     flex-grow: 1;
 }
+
+.group .group-messages::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  
+.group .group-messages::-webkit-scrollbar-thumb {
+    background-color: #D8C4B6;
+    border-radius: 100px;
+  }
 
 .group .group-messages .sender {
     display: flex;

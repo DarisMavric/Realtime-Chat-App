@@ -7,6 +7,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { io, Socket } from "socket.io-client";
+import { MdClose } from "react-icons/md";
 import test from "./test.jpg";
 
 const Chat = ({ contact }) => {
@@ -14,6 +15,7 @@ const Chat = ({ contact }) => {
   const [messages, setMessages] = useState([]);
   const [localImage, setLocalImage] = useState(null);
   const [file, setFile] = useState(null);
+  const [previewFile, setPreviewFile] = useState(null);
 
   const fileInputRef = useRef(null);
 
@@ -93,7 +95,7 @@ const Chat = ({ contact }) => {
       formData.append("userId", currentUser?.id);
       formData.append("contactId", contact._id);
       formData.append("text", message);
-      formData.append("image", file); // If an image is selected, it will be appended here
+      formData.append("image", file && file); // If an image is selected, it will be appended here
 
       const res = await axios.post(
         "http://localhost:8080/api/message/sendMessage",
@@ -113,12 +115,12 @@ const Chat = ({ contact }) => {
       newMessage(""); // Clear the input field after sending the message
       setLocalImage(null);
       setFile(null);
+      setPreviewFile(null);
     }
   };
 
   const handleChange = (e) => {
     const selectedFile = e.target.files[0];
-    setFile(selectedFile);
     if (selectedFile) {
       const reader = new FileReader();
 
@@ -129,9 +131,14 @@ const Chat = ({ contact }) => {
 
       reader.readAsDataURL(selectedFile); // Convert the file to base64 string
     }
+    
+    setFile(selectedFile);
+    setPreviewFile(URL.createObjectURL(selectedFile));
 
     e.target.value = null;
   };
+
+  console.log(file);
 
   return (
     <div className="chat">
@@ -141,7 +148,7 @@ const Chat = ({ contact }) => {
         </div>
         <div className="contact-name">
           <h2>{contact?.fullName}</h2>
-          <p>Online</p>
+          <p>{contact?.about}</p>
         </div>
       </div>
       <div className="chat-messages">
@@ -182,6 +189,13 @@ const Chat = ({ contact }) => {
           )
         )}
       </div>
+      <div className="image-preview">
+          {previewFile && (
+            <div className="image">
+              <img src={previewFile}/> <MdClose onClick={() => {setPreviewFile(null); setFile(null); setLocalImage(null);}}/>
+            </div>
+          )}
+      </div>
       <div className="send-message">
         <input
           type="text"
@@ -193,13 +207,15 @@ const Chat = ({ contact }) => {
           style={{ width: 40, height: 40, cursor: "pointer" }}
           onClick={() => fileInputRef.current.click()}
         />
-        <IoIosSend style={{ width: 40, height: 40 }} onClick={sendMessage} />
         <input
           type="file"
           style={{ display: "none" }}
           ref={fileInputRef}
           onChange={handleChange}
         />
+        <div className="send">
+          <IoIosSend style={{ width: 40, height: 40 }} onClick={sendMessage} />
+        </div>
       </div>
     </div>
   );

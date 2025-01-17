@@ -111,6 +111,21 @@
     height: 50px;
 }
 
+.modal-content .user-list {
+    overflow-y: scroll;
+    height: 250px;
+}
+
+.modal-content .user-list::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  
+  .modal-content .user-list::-webkit-scrollbar-thumb {
+    background-color: #D8C4B6;
+    border-radius: 100px;
+  }
+
 .modal-content .button {
     cursor: pointer;
     margin-top: 20px;

@@ -68,7 +68,7 @@ const Contacts = ({ setChat }) => {
               </div>
               <div className="contact-name">
                 <h2>{user?.fullName}</h2>
-                <p>{messages[user?._id+'-'+currentUser?.id]?.text || messages[currentUser?.id+'-'+user?._id]?.text}</p>
+                <p>{messages[user?._id+'-'+currentUser?.id]?.text || messages[currentUser?.id+'-'+user?._id]?.text || user?.about}</p>
               </div>
             </div>
           )

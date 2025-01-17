@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken"
 export const sendMessage = async(req,res) => {
     upload.single('image')(req, res, async(err) => {
         const {userId,contactId,groupId,text,username} = req.body;
+        console.log(req.body,req.file);
         const image = req.file;
         if(!groupId){
             try {
@@ -14,7 +15,7 @@ export const sendMessage = async(req,res) => {
                     const newMessage = await Message.create({
                         userId,
                         contactId,
-                        text,
+                        text: text || null,
                         image: image?.filename || null
                     })
                     if(newMessage){
@@ -33,11 +34,12 @@ export const sendMessage = async(req,res) => {
                     const newMessage = await Message.create({
                         userId,
                         groupId,
-                        text,
+                        text: text || null,
                         username: username,
                         image: image?.filename || null
                     })
                     if(newMessage){
+                        console.log(newMessage);
                         return res.status(200).json("Message sent");
                     } else {
                         return res.status(400).json("Error");

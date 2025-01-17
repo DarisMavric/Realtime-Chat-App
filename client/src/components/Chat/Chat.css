@@ -9,7 +9,7 @@
 
 .chat .chat-title {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     margin: 15px;
 }
 
@@ -120,13 +120,41 @@
     border-radius: 10px;                  /* Sets the background color to black */  
 }
 
+
+.chat .image-preview {
+   padding: 10px;
+   display: flex;
+}
+
+.chat .image-preview .image {
+    position: relative;
+    max-width: 350px;
+}
+
+.chat .image-preview .image img {
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+}
+
+.chat .image-preview .image svg{
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    color: black;
+    cursor: pointer;
+    top: 0;
+}
+
 .chat .send-message {
     height: 50px;
     width: 100%;
     display: flex;
     align-items: center; /* Center the input within the div */
     justify-content: space-around;
+    padding: 10px;
     margin: 10px;
+    color: #D8C4B6;
 }
 
 .chat .send-message input::placeholder {
@@ -134,7 +162,7 @@
 }
 
 .chat .send-message input {
-    width: 85%;
+    width: 90%;
     height: 50px;
     border-radius: 10px;
     background-color: transparent;
@@ -144,6 +172,3 @@
     padding: 10px;
 }
 
-.chat .send-message {
-    color: #D8C4B6;
-}

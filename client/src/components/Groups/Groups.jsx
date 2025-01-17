@@ -61,11 +61,11 @@ const Groups = ({ setGroup }) => {
           (key) => key.startsWith(group?._id) || key.endsWith(group?._id)
         );
         const messageText = foundKey
-          ? messages[foundKey]?.text?.substring(0, 20) + '...'
+          ? messages[foundKey]?.text
           : "No message for this group.";
 
         const messageToShow = messages[foundKey]?.userId === currentUser?.id
-          ? `You: ${messageText}...`
+          ? `You: ${messageText}`
           : messageText;
 
         return (
