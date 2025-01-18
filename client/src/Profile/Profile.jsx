@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import icon from "../Home/user-avatar-male-5.png";
 import { IoPerson } from "react-icons/io5";
@@ -11,15 +11,25 @@ import { AuthContext } from "../Context/AuthContext";
 import {useFormik} from 'formik'
 import * as Yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
 
   const fileInputRef = React.useRef(null);
 
+  const navigate = useNavigate();
+
   const [err, setErr] = useState("");
   const [file, setFile] = useState(null);
 
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser,edit} = useContext(AuthContext);
+
+
+  useEffect(() => {
+    if(currentUser === null || !currentUser){
+        navigate('/login');
+    }
+  })
 
   const { data, isLoading } = useQuery({
     queryFn: () =>
@@ -57,13 +67,10 @@ const Profile = () => {
         formData.append("image", formik.values.image);  // If an image is selected, it will be appended here
         formData.append("about", formik.values.about);
         try {
-          const res = await axios.post("http://localhost:8080/api/user/editUser", formData, {
-            // Don't manually set `Content-Type`, axios will do this when sending FormData
-          });
-
-          console.log(res.data);
+          await edit(formData);
+          navigate('/')
         }catch(err){
-          setErr(err);
+          setErr(err.response.data);
           console.log(err)
         }
       },

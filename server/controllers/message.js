@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 
 export const sendMessage = async(req,res) => {
     upload.single('image')(req, res, async(err) => {
-        const {userId,contactId,groupId,text,username} = req.body;
+        const {userId,contactId,groupId,text,username,userImage} = req.body;
         console.log(req.body,req.file);
         const image = req.file;
         if(!groupId){
@@ -36,6 +36,7 @@ export const sendMessage = async(req,res) => {
                         groupId,
                         text: text || null,
                         username: username,
+                        userImage,
                         image: image?.filename || null
                     })
                     if(newMessage){

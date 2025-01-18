@@ -24,6 +24,14 @@ export const AuthContextProvider = ({ children }) => {
     setCurrentUser(res.data);
   };
 
+  const edit = async (inputs) => {
+    const res = await axios.post("http://localhost:8080/api/user/editUser", inputs, {
+     withCredentials: true,
+    });
+
+    setCurrentUser(res.data);
+  };
+
 
 
 
@@ -32,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, register,setCurrentUser }}>
+    <AuthContext.Provider value={{ currentUser, login, register,setCurrentUser,edit }}>
       {children}
     </AuthContext.Provider>
   );

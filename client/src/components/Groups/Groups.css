@@ -4,6 +4,7 @@
     display: block;
     padding: 10px;
     border-right: 1px solid white;
+    height: 100vh;
 }
 
 .all-contacts {
@@ -33,6 +34,20 @@
     color: #213555;
 }
 
+.contacts-div {
+    overflow-y: scroll !important;
+    height: 80%;
+}
+
+.contacts-div::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  
+  .contacts-div::-webkit-scrollbar-thumb {
+    background-color: #D8C4B6;
+    border-radius: 100px;
+  }
 
 .contacts .contact {
     display: flex;

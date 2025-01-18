@@ -75,16 +75,25 @@ const Register = () => {
               <input type="text" name="fullName" onChange={formik.handleChange}/>
               <IoPerson className="icon" />
             </div>
+            {formik.errors.fullName && formik.touched.fullName ? (
+                <p className="error">{formik.errors.fullName}</p>
+            ) : null}
             <label for="email">Email</label>
             <div className="input-container">
               <input type="text" name="email" onChange={formik.handleChange}/>
               <MdEmail className="icon" />
             </div>
+            {formik.errors.email && formik.touched.email ? (
+                <p className="error">{formik.errors.email}</p>
+            ) : null}
             <label for="password">Password</label>
             <div className="input-container">
               <input type="password" name="password" onChange={formik.handleChange}/>
               <FaLock className="icon" />
             </div>
+            {formik.errors.password && formik.touched.password ? (
+                <p className="error">{formik.errors.password}</p>
+            ) : null}
             <button onClick={formik.handleSubmit}>Sign Up</button>
           </div>
           <div className="register-form-footer">

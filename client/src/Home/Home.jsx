@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import Navbar from "../components/Navbar/Navbar";
 import Chat from "../components/Chat/Chat";
@@ -6,6 +6,8 @@ import Contacts from "../components/Contacts/Contacts";
 import Welcome from "../components/Welcome/Welcome";
 import Groups from "../components/Groups/Groups";
 import GroupChat from "../components/GroupChat/GroupChat";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const Home = () => {
   const [chat, setChat] = useState(null);
@@ -13,7 +15,15 @@ const Home = () => {
 
   const currentPage = window.location.pathname;
 
-  console.log(currentPage);
+  const navigate = useNavigate();
+
+  const {currentUser} = useContext(AuthContext);
+
+  useEffect(() => {
+    if(currentUser === null || !currentUser){
+      navigate('/login');
+    }
+  })
 
   return (
     <div className="home">

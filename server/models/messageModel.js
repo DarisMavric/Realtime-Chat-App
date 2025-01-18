@@ -10,13 +10,16 @@ const messageSchema = mongoose.Schema({
         type: String,
     },
     groupId: {
-        type: String
+        type: String,
     },
     text: {
         type:String,
     },
     username: {
         type: String
+    },
+    userImage: {
+        type: String,
     },
     image: {
         type:String,

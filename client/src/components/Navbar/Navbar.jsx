@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.css";
-import { FaUserFriends } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
-import { FaSnapchat } from "react-icons/fa6";
+import { IoChatbox } from "react-icons/io5";
 import { BsChatRightDots } from "react-icons/bs";
 import { MdGroup } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Navbar = () => {
   
   const navigate = useNavigate();
 
+  const {currentUser,setCurrentUser} = useContext(AuthContext);
+
+  const logOut = () => {
+    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    localStorage.clear();
+
+    setCurrentUser(null)
+    navigate('/Login');
+  }
+
   return (
     <div className="navbar">
       <div className="logo-and-links">
         <div className="logo">
-          <FaSnapchat />
+          <IoChatbox />
         </div>
         <div className="links">
           <ul>
@@ -39,7 +49,7 @@ const Navbar = () => {
         <div className="links">
           <ul>
             <li>
-              <RiLogoutBoxFill />
+              <RiLogoutBoxFill  onClick={() => logOut()}/>
             </li>
             <li
               onClick={() => navigate('/profile')}

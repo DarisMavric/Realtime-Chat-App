@@ -86,6 +86,7 @@ const GroupChat = ({ group }) => {
       formData.append("groupId", group._id);
       formData.append("text", message);
       formData.append("username", currentUser?.fullName);
+      formData.append("userImage", currentUser?.image);
       formData.append("image", file); // If an image is selected, it will be appended here
 
       const res = await axios.post(
@@ -100,6 +101,7 @@ const GroupChat = ({ group }) => {
         image: localImage,
         groupId: group._id,
         username: currentUser?.fullName,
+        userImage: currentUser?.image,
         userId: currentUser?.id,
       });
 
@@ -125,8 +127,6 @@ const GroupChat = ({ group }) => {
 
     e.target.value = null;
   };
-
-  console.log(messages);
 
 
 
@@ -164,7 +164,7 @@ const GroupChat = ({ group }) => {
           ) : (
             <div className="reciever">
               <div className="reciever-image">
-                <img src={icon} alt="" />
+                <img src={`/images/${message?.userImage}`} alt="" />
               </div>
               <div className="reciever-message">
               <div className="reciever-name">{message?.username}</div>

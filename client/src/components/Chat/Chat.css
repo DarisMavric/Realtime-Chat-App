@@ -13,10 +13,15 @@
     margin: 15px;
 }
 
-.chat-title .contact-image img{
+.chat-title .contact-image {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+}
+
+.chat-title .contact-image img {
+    width: 100%;
+    height: 100%;
 }
 
 .chat-title .contact-name {
@@ -24,6 +29,14 @@
     align-content: center;
     color: #D8C4B6;
     cursor: pointer;
+}
+
+.chat-title .contact-name h2 {
+    font-size: 30px;
+}
+
+.chat-title .contact-name p {
+    font-size: 15px;
 }
 
 .chat .chat-messages {
@@ -101,9 +114,9 @@
 
 .chat .chat-messages .reciever .reciever-message{
     padding: 10px;                            /* Adds padding inside the div */
-    border-top-left-radius: 20px;             /* Rounded top-left corner */
-    border-top-right-radius: 20px;            /* Rounded top-right corner */
-    border-bottom-right-radius: 20px;         /* Rounded bottom-left corner */               
+    border-top-left-radius: 10px;             /* Rounded top-left corner */
+    border-top-right-radius: 10px;            /* Rounded top-right corner */
+    border-bottom-right-radius: 10px;         /* Rounded bottom-left corner */               
     max-width: 40%;                           /* Makes the div take up 50% width of the parent container */
     overflow-wrap: break-word;  
     word-break: break-all;              /* Ensures long words break and wrap to the next line */

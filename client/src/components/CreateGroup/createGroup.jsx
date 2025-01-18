@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import icon from "../../Home/user-avatar-male-5.png";
 import './createGroup.css';
 import { MdClose } from "react-icons/md";
 import axios from 'axios';
 import {useFormik} from 'formik'
 import * as Yup from "yup";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AuthContext } from '../../Context/AuthContext';
 
 const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
   // State to store users, search query, and added users
@@ -14,6 +16,12 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
   const [addedUsers, setAddedUsers] = useState([]);  // State to store the added users\
   const [addedUsersId,setAddedUsersId] = useState([]);
   const [addedUserNames,setAddedUserNames] = useState([]);
+
+
+  const {currentUser} = useContext(AuthContext);
+
+
+  const queryClient = useQueryClient();
 
 
   // Fetch users from the API
@@ -74,6 +82,17 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
     );
   };
 
+  const createGroup = useMutation({
+    mutationFn: async(data) => {
+        await axios.post("http://localhost:8080/api/group/createGroup", data, {
+            withCredentials: true,
+        });
+    },
+    onSuccess: ()=> {
+        return queryClient.invalidateQueries(["groups"]);
+    }
+  })
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -101,13 +120,13 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
       addedUsersId.forEach(id => {
         formData.append("users[]", id);
       });  // Serialize addedUsers to JSON string
+      formData.append("users[]",currentUser?.id)
       addedUserNames.forEach(name => {
         formData.append("usernames[]", name);
       });
+      formData.append("usernames[]",currentUser?.fullName)
       try {
-        const res = await axios.post("http://localhost:8080/api/group/createGroup", formData, {
-          withCredentials: true
-        });
+        createGroup.mutate(formData);
 
         setIsModalOpen(false);
       }catch(err){
@@ -155,10 +174,12 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
 
               {/* Display filtered users */}
               <div className="user-list">
-                {filteredUsers.length === 0 ? (
-                  <p>No users found</p>
-                ) : (
-                  filteredUsers.map((user) => (
+              {filteredUsers.length === 0 ? (
+                <p>No users found</p>
+              ) : (
+                filteredUsers
+                  .filter((user) => user._id !== currentUser?.id) // Filter out the current user
+                  .map((user) => (
                     <div key={user._id} className="user" onClick={() => handleAddUser(user)}>
                       <div className="image">
                         <img
@@ -173,7 +194,7 @@ const CreateGroup = ({ setIsModalOpen, isModalOpen }) => {
                       </div>
                     </div>
                   ))
-                )}
+              )}
               </div>
 
               <div className="button">

@@ -21,3 +21,8 @@ body {
   height: 100vh;
 }
 
+.error {
+  color: #FA8072;
+  align-self: flex-start;
+}
+

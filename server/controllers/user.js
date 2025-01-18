@@ -31,7 +31,7 @@ export const editUser = async(req,res) => {
         if(file){
             const user = await User.findByIdAndUpdate(
                 id, 
-                { 
+                {
                     image: file.filename,
                     fullName: req.body.fullName,  // Update fullName
                     about: req.body.about          // Update about field
@@ -39,22 +39,31 @@ export const editUser = async(req,res) => {
                 { new: true } // This ensures the updated user is returned
             );
             if(user){
-                res.status(200).json("Profile Updated");
+                const data = {
+                    id: user._id,
+                    fullName: user.fullName,
+                    image: user.image,
+                }
+                res.status(200).json(data);
             } else {
                 res.status(400).json("Error");
             }
         } else {
-            console.log(req.body.about)
             const user = await User.findByIdAndUpdate(
                 id, 
-                { 
+                {
                     fullName: req.body.fullName,  // Update fullName
                     about: req.body.about          // Update about field
                 },
                 { new: true } // This ensures the updated user is returned
             );
             if(user){
-                res.status(200).json("Profile Updated");
+                const data = {
+                    id: user._id,
+                    fullName: user.fullName,
+                    image: user.image,
+                }
+                res.status(200).json(data);
             } else {
                 res.status(400).json("Error");
             }
@@ -83,7 +92,7 @@ export const signIn = async(req,res) => {
             const data = {
                 fullName: user.fullName,
                 id: user._id,
-                email: user.email
+                image: user.image
             }
             const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
             res.cookie("accessToken", token);
@@ -120,8 +129,9 @@ export const signUp = async(req,res) => {
 
     if(user){
         const data = {
+            id: user._id,
             fullName: user.fullName,
-            email: user.email
+            image: user.image
         }
         const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
         res.cookie("accessToken", token);

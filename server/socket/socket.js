@@ -57,6 +57,7 @@ io.on("connection", (socket) => {
           groupId: data.groupId,
           text: data.message,
           username: data.username,
+          userImage: data.userImage,
           image: data?.image || null,
 
         };

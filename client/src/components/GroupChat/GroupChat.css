@@ -9,7 +9,7 @@
 
 .group .group-title {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     margin: 15px;
 }
 
@@ -58,17 +58,6 @@
     margin: 10px;
 }
 
-.group .group-messages .sender .sender-image {
-    height: 50px;
-    width: 50px;
-}
-
-.group .group-messages .sender .sender-image img{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
 .group .group-messages .sender .sender-message .sender-name {
     margin-bottom: 5px;
     font-size: 15px;
@@ -81,17 +70,20 @@
     border-top-left-radius: 10px;             /* Rounded top-left corner */
     border-top-right-radius: 10px;            /* Rounded top-right corner */
     border-bottom-left-radius: 10px;         /* Rounded bottom-left corner */
-    max-width: 50%;                              /* Makes the div take up full width of the parent container */                         /* Sets the max-width of the div */                             /* Ensures the div adjusts its height based on content */
-    word-wrap: break-word;                    /* Ensures long words break and wrap to the next line */
-    word-break: break-word;                   /* Ensures the text breaks when necessary */
-    white-space: normal;                      /* Makes sure text wraps at word boundaries */
-    color: #213555;                             /* Sets the text color to white */
-    background-color: #D8C4B6;                 /* Sets the background color to black */  
+    max-width: 40%;                           /* Makes the div take up 50% width of the parent container */
+    overflow-wrap: break-word;                /* Ensures long words break and wrap to the next line */
+    white-space: initial;
+    word-break: break-all;                      /* Makes sure text wraps at word boundaries */
+    color: #213555;                           /* Sets the text color */
+    background-color: #D8C4B6;                /* Sets background color */
+    font-size: 15px;
+    font-weight: 400;                 /* Sets the background color to black */  
 }
 
 .group .group-messages .sender .sender-message img{
-    width: 100px;
-    height: 100px;                 /* Sets the background color to black */  
+    max-width: 100%;                       /* Ensure the image scales within the container */
+    height: auto;                          /* Maintain aspect ratio */                 /* Ensures the image fits well inside the container */
+    border-radius: 10px;                     /* Sets the background color to black */  
 }
 
 .group .group-messages .reciever {
@@ -108,8 +100,8 @@
 }
 
 .group .group-messages .reciever .reciever-image img{
-    height: 50px;
-    width: 50px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
@@ -122,20 +114,23 @@
 
 .group .group-messages .reciever .reciever-message{
     padding: 10px;                            /* Adds padding inside the div */
-    border-top-left-radius: 20px;             /* Rounded top-left corner */
-    border-top-right-radius: 20px;            /* Rounded top-right corner */
-    border-bottom-right-radius: 20px;         /* Rounded bottom-left corner */
-    max-width: 50%;                              /* Makes the div take up full width of the parent container */                         /* Sets the max-width of the div */                             /* Ensures the div adjusts its height based on content */
-    word-wrap: break-word;                    /* Ensures long words break and wrap to the next line */
-    word-break: break-word;                   /* Ensures the text breaks when necessary */
-    white-space: normal;                      /* Makes sure text wraps at word boundaries */
-    color: white;                             /* Sets the text color to white */
-    background-color: #3E5879; 
+    border-top-left-radius: 10px;             /* Rounded top-left corner */
+    border-top-right-radius: 10px;            /* Rounded top-right corner */
+    border-bottom-right-radius: 10px;         /* Rounded bottom-left corner */               
+    max-width: 40%;                           /* Makes the div take up 50% width of the parent container */
+    overflow-wrap: break-word;  
+    word-break: break-all;              /* Ensures long words break and wrap to the next line */
+    white-space: initial;                      /* Makes sure text wraps at word boundaries */
+    color: #F5EFE7;                           /* Sets the text color */
+    background-color: #3E5879;                /* Sets background color */
+    font-size: 15px;
+    font-weight: 400;
 }
 
 .group .group-messages .reciever .reciever-message img{
-    width: 100%;
-    height: 100px;                 /* Sets the background color to black */  
+    max-width: 100%;                       /* Ensure the image scales within the container */
+    height: auto;                          /* Maintain aspect ratio */                 /* Ensures the image fits well inside the container */
+    border-radius: 10px;                   /* Sets the background color to black */  
 }
 
 .group .send-message {
@@ -144,7 +139,9 @@
     display: flex;
     align-items: center; /* Center the input within the div */
     justify-content: space-around;
+    padding: 10px;
     margin: 10px;
+    color: #D8C4B6;
 }
 
 .group .send-message input::placeholder {
@@ -152,7 +149,7 @@
 }
 
 .group .send-message input {
-    width: 85%;
+    width: 90%;
     height: 50px;
     border-radius: 10px;
     background-color: transparent;
@@ -162,6 +159,27 @@
     padding: 10px;
 }
 
-.group .send-message {
-    color: #D8C4B6;
-}
+.group .image-preview {
+    padding: 10px;
+    display: flex;
+ }
+ 
+ .group .image-preview .image {
+     position: relative;
+     max-width: 350px;
+ }
+ 
+ .group .image-preview .image img {
+     object-fit: cover;
+     max-width: 100%;
+     height: auto;
+ }
+ 
+ .group .image-preview .image svg{
+     position: absolute;
+     background-color: white;
+     border-radius: 50%;
+     color: black;
+     cursor: pointer;
+     top: 0;
+ }

@@ -11,7 +11,6 @@
 
 .modal-wrapper {
     width: 500px;
-    height: 550px;
     background: #3E5879;
     position: fixed;
     top: 50%;
@@ -113,7 +112,7 @@
 
 .modal-content .user-list {
     overflow-y: scroll;
-    height: 250px;
+    max-height: 250px;
 }
 
 .modal-content .user-list::-webkit-scrollbar {
