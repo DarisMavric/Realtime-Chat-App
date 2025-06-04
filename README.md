@@ -1,90 +1,88 @@
-Chatter
-Chatter is a full-stack real-time chat application that enables seamless one-to-one and group messaging. Built with the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.IO, it offers features like typing indicators, message history, and user presence tracking.
 
-🚀 Features
-Real-time messaging with Socket.IO
+# Chatter
 
-User authentication and authorization
+**Chatter** is a full-stack real-time chat application that enables seamless one-to-one and group messaging. Built with the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.IO, it offers features like typing indicators, message history, and user presence tracking.
 
-One-to-one and group chat support
+## 🚀 Features
 
-Typing indicators and online/offline status
+- Real-time messaging with Socket.IO
+- User authentication and authorization
+- One-to-one and group chat support
+- Typing indicators and online/offline status
+- Persistent message history stored in MongoDB
+- Responsive and intuitive user interface
 
-Persistent message history stored in MongoDB
+## 🛠️ Tech Stack
 
-Responsive and intuitive user interface
+- **Frontend**: React, Socket.IO Client
+- **Backend**: Node.js, Express.js, Socket.IO
+- **Database**: MongoDB
 
-🛠️ Tech Stack
-Frontend: React, Socket.IO Client
+## 📦 Installation
 
-Backend: Node.js, Express.js, Socket.IO
+### Prerequisites
 
-Database: MongoDB
+- Node.js (v14 or later)
+- MongoDB
 
-📦 Installation
-Prerequisites
-Node.js (v14 or later)
+### Backend Setup
 
-MongoDB
+1. Clone the repository:
 
-Backend Setup
-Clone the repository:
+   ```bash
+   git clone https://github.com/DarisMavric/Realtime-Chat-App.git
+   cd Realtime-Chat-App/backend
+   ```
 
-bash
-Copy
-Edit
-git clone https://github.com/DarisMavric/Realtime-Chat-App.git
-cd Realtime-Chat-App/backend
-Install dependencies:
+2. Install dependencies:
 
-bash
-Copy
-Edit
-npm install
-Create a .env file in the backend directory and add the following:
+   ```bash
+   npm install
+   ```
 
-env
-Copy
-Edit
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-Start the backend server:
+3. Create a `.env` file in the `backend` directory and add the following:
 
-bash
-Copy
-Edit
-npm run dev
-Frontend Setup
-Navigate to the frontend directory:
+   ```env
+   PORT=5000
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
 
-bash
-Copy
-Edit
-cd ../frontend
-Install dependencies:
+4. Start the backend server:
 
-bash
-Copy
-Edit
-npm install
-Start the frontend development server:
+   ```bash
+   npm run dev
+   ```
 
-bash
-Copy
-Edit
-npm start
-📄 Usage
-Open your browser and navigate to http://localhost:3000.
+### Frontend Setup
 
-Register a new account or log in with existing credentials.
+1. Navigate to the frontend directory:
 
-Create or join chat rooms to start messaging in real-time.
+   ```bash
+   cd ../frontend
+   ```
 
-📁 Project Structure
-pgsql
-Copy
-Edit
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the frontend development server:
+
+   ```bash
+   npm start
+   ```
+
+## 📄 Usage
+
+1. Open your browser and navigate to `http://localhost:3000`.
+2. Register a new account or log in with existing credentials.
+3. Create or join chat rooms to start messaging in real-time.
+
+## 📁 Project Structure
+
+```
 Realtime-Chat-App/
 ├── backend/
 │   ├── controllers/
@@ -100,10 +98,12 @@ Realtime-Chat-App/
     │   ├── App.js
     │   └── index.js
     └── package.json
-🧪 Testing
-To run tests, use the following command in both frontend and backend directories:
+```
 
-bash
-Copy
-Edit
+## 🧪 Testing
+
+To run tests, use the following command in both `frontend` and `backend` directories:
+
+```bash
 npm test
+```
