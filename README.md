@@ -43,8 +43,8 @@
 
    ```env
    PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
+   MONGODB_URL=your_mongodb_connection_string
+   SECRET_KEY=your_jwt_secret
    ```
 
 4. Start the backend server:
