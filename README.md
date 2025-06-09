@@ -8,7 +8,6 @@
 - Real-time messaging with Socket.IO
 - User authentication and authorization
 - One-to-one and group chat support
-- Typing indicators and online/offline status
 - Persistent message history stored in MongoDB
 - Responsive and intuitive user interface
 
@@ -51,7 +50,7 @@
 4. Start the backend server:
 
    ```bash
-   npm run dev
+   npm start
    ```
 
 ### Frontend Setup
@@ -79,31 +78,3 @@
 1. Open your browser and navigate to `http://localhost:3000`.
 2. Register a new account or log in with existing credentials.
 3. Create or join chat rooms to start messaging in real-time.
-
-## 📁 Project Structure
-
-```
-Realtime-Chat-App/
-├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── .env
-│   └── server.js
-└── frontend/
-    ├── public/
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── App.js
-    │   └── index.js
-    └── package.json
-```
-
-## 🧪 Testing
-
-To run tests, use the following command in both `frontend` and `backend` directories:
-
-```bash
-npm test
-```
